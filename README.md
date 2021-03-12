@@ -1,2 +1,4 @@
 # all-about-the-journal
-A community journaling website
+A community journaling website.
+
+## Client
