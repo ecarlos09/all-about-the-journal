@@ -1,23 +1,13 @@
 const hostURL = "http://localhost:3000/" 
-
+// HTML Elements
 const timeline = document.getElementById('journal-timeline');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
 
+getAllEntries()
+
 postBtn.addEventListener('click', makeNewEntry)
 
-// makeNewEntry(
-//     {  
-//         message: "my second jurnool entry",
-//         reacts: {
-//             react1: 0,
-//             react2: 0,
-//             react3: 0,
-//         },
-//     }
-// )
-
-getAllEntries()
 
 function getAllEntries() {
     timeline.innerHTML = "" ;
@@ -68,7 +58,7 @@ function processEntry(entry){
     const entryComments = document.createElement("div");
     const entryReacts =  document.createElement("div");
 
-    entryDiv.id = id.toString;
+    entryDiv.id = `${id}`;
     entryDiv.className = "entry-box";
     entryMessage.className = "message-box";
     entryComments.className = "comments-box";
