@@ -4,31 +4,38 @@
     margin: 0;
 }
 
-
 .container{
     width:90%;
     margin:auto;
-   
+}
+
+/* HEADER */
+header{
+    display: flex;
+    justify-content: center;
 }
 
 h1{
     text-align: center;
+    margin-top: 40px;
     font-size: 5em;
-    
+    white-space: nowrap;
+    overflow: hidden;    
+    color: black;
+    border-right: solid 2px black;   
 }
 
+/* FORM */
 form{
     width:60%;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 100px auto;
-    
-       
+    margin: 80px auto;
 }
 
-#buttons-section{
+#form-buttons{
  display:flex;
  flex-direction: row;
  justify-content: flex-end;
@@ -55,3 +62,21 @@ input[type="button"], input[type="submit"]{
     font-size: 1em;
 }
 
+
+/* ANIMATIONS */
+
+h1 {
+    animation: animated-text 3s steps(29,end) 1s 1 normal both,
+               animated-cursor 900ms steps(29,end) infinite;
+  }
+
+  
+  @keyframes animated-text{
+    from{width: 0;}
+    to{width: 410px;}
+  }
+    
+  @keyframes animated-cursor{
+    from{border-right-color: black;}
+    to{border-right-color: transparent;}
+  }
