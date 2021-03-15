@@ -1,7 +1,12 @@
+/* FONTS */
+
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
 *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: 'Varela Round', sans-serif;
 }
 
 .container{
@@ -16,13 +21,14 @@ header{
 }
 
 h1{
-    text-align: center;
+    display: inline;
     margin-top: 40px;
     font-size: 5em;
     white-space: nowrap;
     overflow: hidden;    
     color: black;
     border-right: solid 2px black;   
+
 }
 
 /* FORM */
@@ -73,7 +79,7 @@ h1 {
   
   @keyframes animated-text{
     from{width: 0;}
-    to{width: 410px;}
+    to{width: 450px;}
   }
     
   @keyframes animated-cursor{

@@ -19,8 +19,12 @@
         <form id="journal-entry">
             <textarea name="journal-entry" id="journal-entry" cols="30" rows="10" placeholder="Let us know your thoughts here...(max 300)" maxlength="300"></textarea>
             <div id="form-buttons">
-                <input type="submit" value="Submit">
-                <input type="button" value="GIF">
+                <form id="giphy-form">
+                    <label for="giphy-search">Search for a Giphy</label>
+                    <input type="search" id="giphy-search">
+                    <input type="submit" value="Add GIF">
+                </form>
+                <input type="submit" value="Post">
             </div>
         </form>
     </main>
