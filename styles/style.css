@@ -1,0 +1,57 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+
+.container{
+    width:90%;
+    margin:auto;
+   
+}
+
+h1{
+    text-align: center;
+    font-size: 5em;
+    
+}
+
+form{
+    width:60%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 100px auto;
+    
+       
+}
+
+#buttons-section{
+ display:flex;
+ flex-direction: row;
+ justify-content: flex-end;
+ width:100%;
+ position: relative;
+bottom:40px;
+right:5px
+}
+
+textarea{
+    width:100%;
+    border:none;
+    resize:none;
+    border: 3px solid black;
+    height:25vh;
+    font-size: 2em;
+    padding:10px;
+    border-radius: 10px;
+}
+
+input[type="button"], input[type="submit"]{
+    margin: 0px 5px;
+    padding:5px;
+    font-size: 1em;
+}
+
