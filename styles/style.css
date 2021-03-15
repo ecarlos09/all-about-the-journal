@@ -76,13 +76,29 @@ input[type="button"], input[type="submit"] {
     font-size: 1em;
 }
 
-#giphy-form{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+#gif-form{
+
+    background-color:grey;
+    text-align: center;
+    display:none;
+    padding:10px;
+    
+}
+
+#gifImage{
     display:none;
 }
 
+#gif-form-btns{
+    display: flex;
+    margin: 10px;
+}
+
+#close-gif-section{
+    position: relative;
+    bottom:30px;
+    left:75px;
+}
 
 /* TIMELINE */
 #journal-timeline {

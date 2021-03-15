@@ -3,13 +3,20 @@ const hostURL = "http://localhost:3000/"
 const timeline = document.getElementById('journal-timeline');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
-const giphyForm = document.getElementById('giphy-form')
-const APIkey = "aWqPT5uBm54EQ5x9ooFj4TpWjXxF0mNh";
-const header = document.querySelector('h1')
-const test = document.getElementById('test')
-const giphyButton = document.getElementById('giphyButton')
-const addGIF = document.getElementById('search-gif')
 const formContainer = document.getElementById('form-container')
+
+// GIPHY Elements
+const addGiphyButton = document.getElementById('addGiphy')
+const gifImage = document.getElementById('gifImage')
+const gifBtn = document.getElementById('gif-btn')
+const gifPreviewBtn = document.getElementById('gifPreviewBtn')
+const previewGifSection = document.getElementById('previewGifSection')
+const gifForm = document.getElementById('gif-form')
+const APIkey = "aWqPT5uBm54EQ5x9ooFj4TpWjXxF0mNh";
+
+
+
+
 
 
 getAllEntries()
@@ -104,33 +111,26 @@ function processEntry(entry){
 
 //GIPHY
 
-addGIF.addEventListener('click', showGiphyForm)
+gifBtn.addEventListener('click', showGiphyForm)
 
 function showGiphyForm(){
-    if (giphyForm.style.display === "block"){
-    giphyForm.style.display = "none"
-    entryForm.style.width = "100%";}
-
-    else{
-        giphyForm.style.display = "block"
-        giphyForm.style.backgroundColor="pink";
-        entryForm.style.width = "80%";
+    if (gifForm.style.display === "block"){
+        gifForm.style.display = "none"
+        entryForm.style.width = "100%";
     }
 
-formContainer.style.display = "flex"
-formContainer.style.justifyContent= "space-between"
+    else{
+        gifForm.style.display = "flex"
+        entryForm.style.width = "80%";
+        formContainer.style.display = "flex"
+        formContainer.style.justifyContent= "space-between"
+    }
 
 }
 
-function shuffle(){
-
-}
 
 
-
-
-
-giphyForm.addEventListener('submit', searchGiphy)
+gifForm.addEventListener('submit', searchGiphy)
 
 function searchGiphy(event){
     event.preventDefault();
@@ -141,8 +141,36 @@ function searchGiphy(event){
     .then (content => {
         let image = document.createElement('img')
         image.src = content.data[0].images.fixed_width.url;
-        test.appendChild(image)
+        previewGifSection.appendChild(image)
         
     })
     .catch(err =>  console.log(err))
+}
+
+    addGiphyButton.addEventListener('click', addGiphy)
+
+    function addGiphy(event){
+        event.preventDefault()
+        let query = document.getElementById("giphy-search").value.trim()
+        let url =`https://api.giphy.com/v1/gifs/search?api_key=${APIkey}&q=${query}&limit=1&offset=0&rating=g&lang=en`
+        fetch(url)
+        .then(response => response.json())
+        .then (content => {
+            let image = document.createElement('img')
+            gifImage.src = content.data[0].images.fixed_width.url;
+
+        gifImage.style.display = "block";
+        gifForm.style.display = "none"
+        entryForm.style.width = "100%";
+        })
+
+
+
+
+
+
+
+
+
+
 }

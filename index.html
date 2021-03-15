@@ -17,42 +17,33 @@
 
     <main class="container">
         <div id="form-container">
-        <form id="journal-entry">
-            <textarea name="journal-entry" form="journal-entry" cols="30" rows="10"
-                placeholder="Let us know your thoughts here...(max 300)" maxlength="300"></textarea>
-            <input type="image">
-           
-            <div id="form-buttons">
-                
-                <input id="search-gif" type="button" value="GIF">
-
-                <input id="post-btn" type="submit" value="Post">
-            </div>
-
-
-
-        </form>
+            <form id="journal-entry">
+                <textarea name="journal-entry" form="journal-entry" cols="30" rows="10"
+                    placeholder="Let us know your thoughts here...(max 300)" maxlength="300"></textarea>
+                <input id="gifImage" type="image">    
+                <div id="form-buttons">       
+                    <input id="gif-btn" type="button" value="GIF">
+                    <input id="post-btn" type="submit" value="Post">
+                </div>
+            </form>
         
 
         <!-- unable to nest form in a form -->
-        <form id="giphy-form">
-            <div id ="test"></div>
+            <form id="gif-form">
+                <div id ="previewGifSection"></div>
+                <label for="giphy-search">Search for a Giphy</label>
+                <input type="search" id="giphy-search">
+                <div id="gif-form-btns">
+                    <input id= "gifPreviewBtn" type="submit" value="Preview">
+                    <input id= "addGiphy" type="button" value="Add">
+                </div>
+            </form>
 
-            <label for="giphy-search">Search for a Giphy</label>
-            <input type="search" id="giphy-search">
-            <input id= "giphyButton" type="submit" value="Search">
-            <input id= "add" type="button" value="Add">
-
-
-        </form>
-
-    </div>
+        </div>
 
         <section id="journal-timeline">
 
         </section>
-
-     
         
     </main>
 
