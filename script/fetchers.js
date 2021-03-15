@@ -9,8 +9,6 @@ async function get(route) {
 }
 
 async function create(data) {
-   
-    
     const body = {"message": data};
 
     const postRoute = "entries/";
