@@ -34,13 +34,20 @@ h1 {
 
 /* FORM */
 
-form {
+#form-container{
+    border: 3px solid black;
     width: 60%;
+    margin: auto;
+}
+
+form {
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 80px auto;
+   
+    background-color: blue;
 }
 
 #form-buttons {
@@ -57,7 +64,7 @@ textarea {
     width: 100%;
     border: none;
     resize: none;
-    border: 3px solid black;
+    
     height: 25vh;
     font-size: 2em;
     padding: 10px;
@@ -68,6 +75,12 @@ input[type="button"], input[type="submit"] {
     margin: 0px 5px;
     padding: 5px;
     font-size: 1em;
+}
+
+#giphy-form{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 
