@@ -46,8 +46,7 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-   
-    background-color: blue;
+
 }
 
 #form-buttons {
@@ -56,7 +55,7 @@ form {
     justify-content: flex-end;
     width: 100%;
     position: relative;
-    bottom: 40px;
+   
     right: 5px
 }
 
@@ -65,8 +64,8 @@ textarea {
     border: none;
     resize: none;
     
-    height: 25vh;
-    font-size: 2em;
+    height: 20vh;
+    font-size: 1em;
     padding: 10px;
     border-radius: 10px;
 }
@@ -81,6 +80,7 @@ input[type="button"], input[type="submit"] {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    display:none;
 }
 
 
