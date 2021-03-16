@@ -35,13 +35,19 @@ h1 {
 
 /* FORM */
 
-form {
+#form-container{
+    border: 3px solid black;
     width: 60%;
+    margin: auto;
+}
+
+form {
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 80px auto;
+
 }
 
 #form-buttons {
@@ -49,7 +55,7 @@ form {
     justify-content: flex-end;
     width: 100%;
     position: relative;
-    bottom: 40px;
+   
     right: 5px
 }
 
@@ -57,9 +63,9 @@ textarea {
     width: 100%;
     border: none;
     resize: none;
-    border: 3px solid black;
-    height: 25vh;
-    font-size: 2em;
+    
+    height: 20vh;
+    font-size: 1em;
     padding: 10px;
     border-radius: 10px;
 }
@@ -70,22 +76,49 @@ input[type="button"], input[type="submit"] {
     font-size: 1em;
 }
 
-
 /* TIMELINE */
 #secondHalf {
     display: flex;
     width: 100%;
 }
+
 #journal-timeline {
     display: inline-flex;
     flex-flow: row wrap;
     justify-content: center; 
     width: 80%;
     margin: auto; 
+    background-color:grey;
+    text-align: center;
+    display:none;
+    padding:10px; 
 }
+
+#gifImage{
+    display:none;
+}
+
+#gif-form-btns{
+    display: flex;
+    margin: 10px;
+}
+
+#close-gif-section{
+    position: relative;
+    bottom:30px;
+    left:75px;
+}
+
+/* TIMELINE */
+/* #journal-timeline {
+    display: flex;
+    flex-flow: column-reverse wrap;
+    justify-content: center;
+} */
 
 
 /* POSTS */
+
 .entry-box
      {padding: 2em;
       border: black solid 2px;
@@ -100,13 +133,55 @@ input[type="button"], input[type="submit"] {
     background-color: rgb(199, 199, 199);
     padding: 2em;
     word-wrap: break-word;
+    margin: 1em;
+}
+
+.gif-box img{
+    width: 100%;
+    height: auto;
+    /* overflow: hidden; */
 }
 
 .comments-box {
     background-color: rgb(68, 68, 68);
     color: white;
     padding: 1em;
-    margin-left: 4em;
+    width: 80%;
+    margin-top: 1em;
+}
+
+.interaction-box {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.comment-input {
+    flex-grow: 2;
+    border: 2px solid rgb(32, 32, 32);
+    background: whitesmoke;
+    border-radius: 1000px;
+    padding: 1em;
+    margin-left: 1em;
+    margin-right: 2em;
+    outline: none;
+}
+
+button {
+    width: 25px;
+    height: 25px;
+    background: rgb(61, 61, 61);
+    border-radius: 100%;
+	color: inherit;
+	border: none;
+	padding: 1em;
+    /* margin: 0.2em; */
+	font: inherit;
+	cursor: pointer;
+	outline: none;
+    text-align: center;
 }
 
 /* ANIMATIONS */
