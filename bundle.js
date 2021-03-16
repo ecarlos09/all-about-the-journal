@@ -1,5 +1,53 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 
+const hostURL = "http://localhost:3000/" 
+
+async function get(route) {
+    let response = await fetch(hostURL + route)
+    response = await response.json();
+    return response;
+}
+
+async function create(data) {
+    const body = {"message": data};
+
+    const postRoute = "entries/";
+
+    const options = {
+        method: "POST",
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }
+
+    let response = await fetch(hostURL + postRoute, options)
+    response = await response.json();
+    return response;
+}
+
+async function add(id, data, route) {
+
+    const patchRoute = `entries/${id}/${route}`;
+    const options = {
+        method: "PATCH",
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+
+    let response = await fetch(hostURL + patchRoute, options)
+    response = await response.json();
+    return response;
+}
+
+module.exports = {get, add, create};
+
+
+},{}],2:[function(require,module,exports){
 
 
 //GIPHY
@@ -68,9 +116,20 @@ function searchGiphy(event){
 
 
 module.exports = {showGiphyForm,searchGiphy,addGiphy}
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
+
 const hostURL = "http://localhost:3000/" 
 const giphy = require('./giphy')
+const fetchers = require('./fetchers');
+
+// Create fetchers
+const getAllEntries = fetchers.get("entries/");
+const getEntryByID = (id) => fetchers.get(`entries/${id}`);
+const addComment = (id, data) => fetchers.add(id, data, 'comments');
+const addReact = (id, data) => fetchers.add(id, data, 'reacts');
+const createEntry = (message) => fetchers.create(message);
+
+
 // HTML Elements
 const timeline = document.getElementById('journal-timeline');
 const entryForm = document.getElementById("journal-entry");
@@ -87,82 +146,11 @@ const gifForm = document.getElementById('gif-form')
 const APIkey = "aWqPT5uBm54EQ5x9ooFj4TpWjXxF0mNh";
 
 
+//GIPHY
 
-
-
-
-getAllEntries()
-
-postBtn.addEventListener('click', makeNewEntry)
-
-
-
-
-const hostURL = "http://localhost:3000/" 
-
-async function get(route) {
-    let response = await fetch(hostURL + route)
-    response = await response.json();
-    return response;
-}
-
-async function create(data) {
-    const body = {"message": data};
-
-    const postRoute = "entries/";
-
-    const options = {
-        method: "POST",
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    }
-
-    let response = await fetch(hostURL + postRoute, options)
-    response = await response.json();
-    return response;
-}
-
-async function add(id, data, route) {
-
-    const patchRoute = `entries/${id}/${route}`;
-    const options = {
-        method: "PATCH",
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    }
-
-    let response = await fetch(hostURL + patchRoute, options)
-    response = await response.json();
-    return response;
-}
-
-module.exports = {get, add, create};
-
-
-},{}],2:[function(require,module,exports){
-
-const fetchers = require('./fetchers');
-
-// Create fetchers
-const getAllEntries = fetchers.get("entries/");
-const getEntryByID = (id) => fetchers.get(`entries/${id}`);
-
-const addComment = (id, data) => fetchers.add(id, data, 'comments');
-const addReact = (id, data) => fetchers.add(id, data, 'reacts');
-
-const createEntry = (message) => fetchers.create(message);
-
-// HTML Elements
-const timeline = document.getElementById('journal-timeline');
-const entryForm = document.getElementById("journal-entry");
-const postBtn = document.getElementById('post-btn');
-
+gifBtn.addEventListener('click', giphy.showGiphyForm)
+gifForm.addEventListener('submit', giphy.searchGiphy)
+addGiphyButton.addEventListener('click', giphy.addGiphy)
 
 
 // Post button
@@ -298,38 +286,6 @@ function toggleComments(entryComments) {
     return isVisible;
 }
 
-
-
-
-
-
-
-
-
-//GIPHY
-
-gifBtn.addEventListener('click', giphy.showGiphyForm)
-
-
-
-gifForm.addEventListener('submit', giphy.searchGiphy)
-
-
- addGiphyButton.addEventListener('click', giphy.addGiphy)
-
-
-
-
-
-
-
-
-
-
-
-
-},{"./giphy":1}]},{},[2]);
-=======
 function loadComment(comment){
     const commentElement = document.createElement('div');
     commentElement.className = "comment";
@@ -338,5 +294,22 @@ function loadComment(comment){
 }
 
 
-},{"./fetchers":1}]},{},[2]);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+},{"./fetchers":1,"./giphy":2}]},{},[3]);
