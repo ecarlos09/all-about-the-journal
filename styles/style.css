@@ -10,6 +10,7 @@
     font-family: 'Varela Round', sans-serif;
 }
 
+
 .container {
     width: 90%;
     margin: auto;
@@ -44,7 +45,6 @@ form {
 }
 
 #form-buttons {
-    display: flex;
     flex-direction: row;
     justify-content: flex-end;
     width: 100%;
@@ -72,24 +72,34 @@ input[type="button"], input[type="submit"] {
 
 
 /* TIMELINE */
-#journal-timeline {
+#secondHalf {
     display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-
+    width: 100%;
+}
+#journal-timeline {
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: center; 
+    width: 80%;
+    margin: auto; 
 }
 
 
 /* POSTS */
-.entry-box {
-    padding: 2em;
-    border: black solid 2px;
-    border-radius: 10px;
-}
+.entry-box
+     {padding: 2em;
+      border: black solid 2px;
+      border-radius: 10px;
+      flex: 1 1 auto;
+      min-width: 250px;
+      margin: 20px;
+     } 
+
 
 .message-box {
     background-color: rgb(199, 199, 199);
     padding: 2em;
+    word-wrap: break-word;
 }
 
 .comments-box {
