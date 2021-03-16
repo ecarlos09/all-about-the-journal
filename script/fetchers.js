@@ -1,7 +1,6 @@
 
 const hostURL = "http://localhost:3000/" 
 
-
 async function get(route) {
     let response = await fetch(hostURL + route)
     response = await response.json();
@@ -30,7 +29,6 @@ async function create(data) {
 async function add(id, data, route) {
 
     const patchRoute = `entries/${id}/${route}`;
-
     const options = {
         method: "PATCH",
         mode: 'cors',
@@ -44,8 +42,6 @@ async function add(id, data, route) {
     response = await response.json();
     return response;
 }
-
-
 
 module.exports = {get, add, create};
 

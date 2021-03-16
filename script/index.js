@@ -15,6 +15,8 @@ const timeline = document.getElementById('journal-timeline');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
 
+
+
 // Post button
 postBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -28,7 +30,54 @@ getAllEntries.then(entries => {
 });
 
 
-function displayEntry(entry){
+// Listen for journal entry button clicks
+timeline.addEventListener('click', (e) => {
+    const target = e.target;
+
+    if (target.className === "comment-btn") {
+        toggleComments(target.parentElement.nextElementSibling);
+    }
+
+    if(target.className.includes("reactBtn")){
+        target.disabled == true;
+        const btnID = target.className[target.className.length - 1]
+        const id = target.closest(".entry-box").id;      
+        const update = {reactBtn : btnID}
+        
+        addReact(id, update).then(reacts => {
+            target.textContent = reacts[btnID - 1];
+        });
+
+    }
+})
+
+// Listen for journal entry text input
+timeline.addEventListener('keyup', (e) => {
+    const target = e.target;
+
+    if (e.key === "Enter" && target.className === "comment-input") {
+        const commentInput = target;
+        const id = commentInput.parentElement.parentElement.id;
+        const commentsBox = commentInput.parentElement.nextElementSibling;
+
+        if (commentInput.value.trim().length > 0) {
+            const commentObj = { comments: [commentInput.value] }
+            // comments.push(commentInput.value);
+            commentInput.value = "";
+
+            addComment(id, commentObj).then(comments => {
+                commentsBox.prepend(loadComment(comments[comments.length -1]));
+            });
+        }
+
+        if (commentsBox.style.display === "none") {
+            toggleComments(commentsBox);
+        }
+    }
+})
+
+
+function displayEntry(entry) {
     const id = entry.id;
     const message = entry.message;
     const comments = entry.comments;
@@ -38,7 +87,7 @@ function displayEntry(entry){
     const entryMessage = document.createElement("div");
     const entryInteraction = document.createElement("div");
     const entryComments = document.createElement("div");
-    const entryReacts =  document.createElement("div");
+    const entryReacts = document.createElement("div");
 
     entryDiv.id = `${id}`;
     entryDiv.className = "entry-box";
@@ -54,70 +103,30 @@ function displayEntry(entry){
     const commentBtn = document.createElement("button");
     commentBtn.className = "comment-btn"
 
-    // Toggle comments on click
-    commentBtn.addEventListener('click', () => toggleComments(entryComments));
     // Hide by default
     entryComments.style.display = "none";
-
 
     // COMMENT INPUT
     const commentInput = document.createElement("input");
     commentInput.className = "comment-input";
     commentInput.type = "text";
     commentInput.placeholder = "say something nice";
-    
-    commentInput.addEventListener('keyup', (e) => {
-        
-        if(e.key === "Enter" && commentInput.value.trim().length > 0) {
-            const commentObj = {comments: [commentInput.value]}
-            comments.push(commentInput.value);
-            commentInput.value = "";
-            addComment(id, commentObj);
-          
-            if(entryComments.style.display === "none")
-                toggleComments(entryComments);
-        }
-    })
 
-    // Create comment elements
     if (comments.length > 0) {
         comments.forEach(comment => {
-            const commentElement = document.createElement('div');
-            commentElement.className = "comment";
-            commentElement.textContent = comment;
-            entryComments.appendChild(commentElement);
+            entryComments.prepend(loadComment(comment));
         })
     }
+    
 
     // REACTS
-    const react1Btn = document.createElement("button");
-    const react2Btn = document.createElement("button");
-    const react3Btn = document.createElement("button");
-
     entryReacts.className = "react-btns";
-    react1Btn.className = "react1-btn";
-    react2Btn.className = "react2-btn";
-    react3Btn.className = "react3-btn";
 
-    const reactBtns = [react1Btn, react2Btn, react3Btn]
-
-    // reactBtns.forEach((btn, idx) => {
-    //     btn.value = reacts[`react${idx+1}`];
-    //     btn.textContent = reacts[`react${idx+1}`];
-
-    //     btn.addEventListener('click', (e) => {
-    //         btn.disabled = true;
-    //         const reactUpdate = {
-    //             reacts: {
-    //                 [`react${idx+1}`]: 1
-    //             }
-    //         }
-    //         addReact(entry.id, reactUpdate);
-    //     })
-        
-    //     entryReacts.appendChild(btn);
-    // })
-
+    for (let i = 0; i < 3; i++) {
+        const reactBtn = document.createElement("button");
+        reactBtn.className = `reactBtn${i + 1}`;
+        entryReacts.appendChild(reactBtn);
+    }
 
     // CONSTRUCT
     entryInteraction.appendChild(commentBtn);
@@ -129,9 +138,7 @@ function displayEntry(entry){
     entryDiv.appendChild(entryComments);
 
     timeline.prepend(entryDiv);
-
 }
-
 
 // HELPERS
 
@@ -139,6 +146,14 @@ function toggleComments(entryComments) {
     let isVisible = entryComments.style.display === "block";
     console.log(isVisible);
     isVisible ? entryComments.style.display = "none" :
-                entryComments.style.display = "block"
+        entryComments.style.display = "block"
     return isVisible;
 }
+
+function loadComment(comment){
+    const commentElement = document.createElement('div');
+    commentElement.className = "comment";
+    commentElement.textContent = comment;
+    return commentElement;   
+}
+
