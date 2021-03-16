@@ -72,12 +72,11 @@ input[type="button"], input[type="submit"] {
 
 
 /* TIMELINE */
-#journal-timeline {
+/* #journal-timeline {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column-reverse wrap;
     justify-content: center;
-
-}
+} */
 
 
 /* POSTS */
@@ -85,18 +84,55 @@ input[type="button"], input[type="submit"] {
     padding: 2em;
     border: black solid 2px;
     border-radius: 10px;
+    margin-bottom: 2em;
 }
 
 .message-box {
     background-color: rgb(199, 199, 199);
     padding: 2em;
+    margin: 1em;
 }
 
 .comments-box {
     background-color: rgb(68, 68, 68);
     color: white;
     padding: 1em;
-    margin-left: 4em;
+    width: 80%;
+    margin-top: 1em;
+}
+
+.interaction-box {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.comment-input {
+    flex-grow: 2;
+    border: 2px solid rgb(32, 32, 32);
+    background: whitesmoke;
+    border-radius: 1000px;
+    padding: 1em;
+    margin-left: 1em;
+    margin-right: 2em;
+    outline: none;
+}
+
+button {
+    width: 25px;
+    height: 25px;
+    background: rgb(61, 61, 61);
+    border-radius: 100%;
+	color: inherit;
+	border: none;
+	padding: 1em;
+    /* margin: 0.2em; */
+	font: inherit;
+	cursor: pointer;
+	outline: none;
+    text-align: center;
 }
 
 /* ANIMATIONS */
