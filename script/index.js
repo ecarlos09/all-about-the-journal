@@ -1,4 +1,5 @@
 const hostURL = "http://localhost:3000/" 
+const giphy = require('./giphy')
 // HTML Elements
 const timeline = document.getElementById('journal-timeline');
 const entryForm = document.getElementById("journal-entry");
@@ -111,58 +112,14 @@ function processEntry(entry){
 
 //GIPHY
 
-gifBtn.addEventListener('click', showGiphyForm)
-
-function showGiphyForm(){
-    if (gifForm.style.display === "block"){
-        gifForm.style.display = "none"
-        entryForm.style.width = "100%";
-    }
-
-    else{
-        gifForm.style.display = "flex"
-        entryForm.style.width = "80%";
-        formContainer.style.display = "flex"
-        formContainer.style.justifyContent= "space-between"
-    }
-
-}
+gifBtn.addEventListener('click', giphy.showGiphyForm)
 
 
 
-gifForm.addEventListener('submit', searchGiphy)
+gifForm.addEventListener('submit', giphy.searchGiphy)
 
-function searchGiphy(event){
-    event.preventDefault();
-    let query = document.getElementById("giphy-search").value.trim()
-    let url =`https://api.giphy.com/v1/gifs/search?api_key=${APIkey}&q=${query}&limit=1&offset=0&rating=g&lang=en`
-    fetch(url)
-    .then(response => response.json())
-    .then (content => {
-        let image = document.createElement('img')
-        image.src = content.data[0].images.fixed_width.url;
-        previewGifSection.appendChild(image)
-        
-    })
-    .catch(err =>  console.log(err))
-}
 
-    addGiphyButton.addEventListener('click', addGiphy)
-
-    function addGiphy(event){
-        event.preventDefault()
-        let query = document.getElementById("giphy-search").value.trim()
-        let url =`https://api.giphy.com/v1/gifs/search?api_key=${APIkey}&q=${query}&limit=1&offset=0&rating=g&lang=en`
-        fetch(url)
-        .then(response => response.json())
-        .then (content => {
-            let image = document.createElement('img')
-            gifImage.src = content.data[0].images.fixed_width.url;
-
-        gifImage.style.display = "block";
-        gifForm.style.display = "none"
-        entryForm.style.width = "100%";
-        })
+ addGiphyButton.addEventListener('click', giphy.addGiphy)
 
 
 
@@ -173,4 +130,4 @@ function searchGiphy(event){
 
 
 
-}
+
