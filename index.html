@@ -18,22 +18,35 @@
     </header>
 
     <main class="container">
-        <form id="journal-entry">
-            <textarea name="journal-entry" form="journal-entry" cols="30" rows="10"
-                placeholder="Let us know your thoughts here...(max 300)" maxlength="300"></textarea>
-            <div id="form-buttons">
-                <form id="giphy-form">
-                    <label for="giphy-search">Search for a Giphy</label>
-                    <input type="search" id="giphy-search">
-                    <input type="submit" value="Add GIF">
-                </form>
-                <input id="post-btn" type="submit" value="Post">
-            </div>
-        </form>
+        <div id="form-container">
+            <form id="journal-entry">
+                <textarea name="journal-entry" form="journal-entry" cols="30" rows="10"
+                    placeholder="Let us know your thoughts here...(max 300)" maxlength="300"></textarea>
+                <input id="gifImage" type="image">    
+                <div id="form-buttons">       
+                    <input id="gif-btn" type="button" value="GIF">
+                    <input id="post-btn" type="submit" value="Post">
+                </div>
+            </form>
+        
+
+        <!-- unable to nest form in a form -->
+            <form id="gif-form">
+                <div id ="previewGifSection"></div>
+                <label for="giphy-search">Search for a Giphy</label>
+                <input type="search" id="giphy-search">
+                <div id="gif-form-btns">
+                    <input id= "gifPreviewBtn" type="submit" value="Preview">
+                    <input id= "addGiphy" type="button" value="Add">
+                </div>
+            </form>
+
+        </div>
 
         <section id="journal-timeline">
 
         </section>
+        
     </main>
 
 </body>

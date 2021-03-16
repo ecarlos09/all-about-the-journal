@@ -34,13 +34,19 @@ h1 {
 
 /* FORM */
 
-form {
+#form-container{
+    border: 3px solid black;
     width: 60%;
+    margin: auto;
+}
+
+form {
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 80px auto;
+
 }
 
 #form-buttons {
@@ -49,7 +55,7 @@ form {
     justify-content: flex-end;
     width: 100%;
     position: relative;
-    bottom: 40px;
+   
     right: 5px
 }
 
@@ -57,9 +63,9 @@ textarea {
     width: 100%;
     border: none;
     resize: none;
-    border: 3px solid black;
-    height: 25vh;
-    font-size: 2em;
+    
+    height: 20vh;
+    font-size: 1em;
     padding: 10px;
     border-radius: 10px;
 }
@@ -70,6 +76,29 @@ input[type="button"], input[type="submit"] {
     font-size: 1em;
 }
 
+#gif-form{
+
+    background-color:grey;
+    text-align: center;
+    display:none;
+    padding:10px;
+    
+}
+
+#gifImage{
+    display:none;
+}
+
+#gif-form-btns{
+    display: flex;
+    margin: 10px;
+}
+
+#close-gif-section{
+    position: relative;
+    bottom:30px;
+    left:75px;
+}
 
 /* TIMELINE */
 /* #journal-timeline {

@@ -1,20 +1,37 @@
 
+const hostURL = "http://localhost:3000/" 
+const giphy = require('./giphy')
 const fetchers = require('./fetchers');
 
 // Create fetchers
 const getAllEntries = fetchers.get("entries/");
 const getEntryByID = (id) => fetchers.get(`entries/${id}`);
-
 const addComment = (id, data) => fetchers.add(id, data, 'comments');
 const addReact = (id, data) => fetchers.add(id, data, 'reacts');
-
 const createEntry = (message) => fetchers.create(message);
+
 
 // HTML Elements
 const timeline = document.getElementById('journal-timeline');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
+const formContainer = document.getElementById('form-container')
 
+// GIPHY Elements
+const addGiphyButton = document.getElementById('addGiphy')
+const gifImage = document.getElementById('gifImage')
+const gifBtn = document.getElementById('gif-btn')
+const gifPreviewBtn = document.getElementById('gifPreviewBtn')
+const previewGifSection = document.getElementById('previewGifSection')
+const gifForm = document.getElementById('gif-form')
+const APIkey = "aWqPT5uBm54EQ5x9ooFj4TpWjXxF0mNh";
+
+
+//GIPHY
+
+gifBtn.addEventListener('click', giphy.showGiphyForm)
+gifForm.addEventListener('submit', giphy.searchGiphy)
+addGiphyButton.addEventListener('click', giphy.addGiphy)
 
 
 // Post button
@@ -156,4 +173,22 @@ function loadComment(comment){
     commentElement.textContent = comment;
     return commentElement;   
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
