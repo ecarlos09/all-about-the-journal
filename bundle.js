@@ -163,6 +163,7 @@ postBtn.addEventListener('click', (e) => {
     const gif = gifImage.src;
     const data = {message: message, gif: gif};
     createEntry(data).then(entry => displayEntry(entry));
+    
 })
 
 // Load entries
@@ -174,11 +175,11 @@ getAllEntries.then(entries => {
 // Listen for journal entry button clicks
 timeline.addEventListener('click', (e) => {
     const target = e.target;
-
+    // Toggle comment section
     if (target.className === "comment-btn") {
         toggleComments(target.parentElement.nextElementSibling);
     }
-
+    // Send reacts
     if(target.className.includes("reactBtn")){
         target.disabled == true;
         const btnID = target.className[target.className.length - 1]
@@ -186,7 +187,7 @@ timeline.addEventListener('click', (e) => {
         const update = {reactBtn : btnID}
         
         addReact(id, update).then(reacts => {
-            target.textContent = reacts[btnID - 1];
+            target.children[0].textContent = reacts[btnID - 1];
         });
 
     }
@@ -203,7 +204,6 @@ timeline.addEventListener('keyup', (e) => {
 
         if (commentInput.value.trim().length > 0) {
             const commentObj = { comments: [commentInput.value] }
-            // comments.push(commentInput.value);
             commentInput.value = "";
 
             addComment(id, commentObj).then(comments => {
@@ -225,7 +225,6 @@ function displayEntry(entry) {
     const comments = entry.comments;
     const reacts = entry.reacts;
     
-
     const entryDiv = document.createElement("div");
     const entryMessage = document.createElement("div");
     const entryGif = document.createElement("div");
@@ -251,7 +250,6 @@ function displayEntry(entry) {
         entryGif.appendChild(gif);
     }
     
-
     // COMMENTS 
     const commentBtn = document.createElement("button");
     commentBtn.className = "comment-btn"
@@ -276,7 +274,13 @@ function displayEntry(entry) {
 
     for (let i = 0; i < 3; i++) {
         const reactBtn = document.createElement("button");
-        reactBtn.className = `reactBtn${i + 1}`;
+        const reactNum = document.createElement("div");
+        
+        reactBtn.className = `react-btn reactBtn${i + 1}`;
+        reactNum.className = "react-num hide";
+        reactNum.textContent = reacts[i];
+        
+        reactBtn.appendChild(reactNum);
         entryReacts.appendChild(reactBtn);
     }
 
