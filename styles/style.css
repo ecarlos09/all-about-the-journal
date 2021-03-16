@@ -122,6 +122,12 @@ input[type="button"], input[type="submit"] {
     margin: 1em;
 }
 
+.gif-box img{
+    width: 100%;
+    height: auto;
+    /* overflow: hidden; */
+}
+
 .comments-box {
     background-color: rgb(68, 68, 68);
     color: white;

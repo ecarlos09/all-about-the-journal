@@ -38,7 +38,9 @@ addGiphyButton.addEventListener('click', giphy.addGiphy)
 postBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const message = entryForm['journal-entry'].value;
-    createEntry(message).then(entry => displayEntry(entry));
+    const gif = gifImage.src;
+    const data = {message: message, gif: gif};
+    createEntry(data).then(entry => displayEntry(entry));
 })
 
 // Load entries
@@ -97,11 +99,14 @@ timeline.addEventListener('keyup', (e) => {
 function displayEntry(entry) {
     const id = entry.id;
     const message = entry.message;
+    const gifURL = entry.gif || null;
     const comments = entry.comments;
     const reacts = entry.reacts;
+    
 
     const entryDiv = document.createElement("div");
     const entryMessage = document.createElement("div");
+    const entryGif = document.createElement("div");
     const entryInteraction = document.createElement("div");
     const entryComments = document.createElement("div");
     const entryReacts = document.createElement("div");
@@ -109,12 +114,21 @@ function displayEntry(entry) {
     entryDiv.id = `${id}`;
     entryDiv.className = "entry-box";
     entryMessage.className = "message-box";
+    entryGif.className = "gif-box";
     entryInteraction.className = "interaction-box"
     entryComments.className = "comments-box";
     entryReacts.className = "react-btns";
 
     // MESSAGE
     entryMessage.textContent = message;
+
+    // GIF
+    if(gifURL){
+        const gif = document.createElement('img');
+        gif.src = gifURL;
+        entryGif.appendChild(gif);
+    }
+    
 
     // COMMENTS 
     const commentBtn = document.createElement("button");
@@ -134,7 +148,6 @@ function displayEntry(entry) {
             entryComments.prepend(loadComment(comment));
         })
     }
-    
 
     // REACTS
     entryReacts.className = "react-btns";
@@ -151,6 +164,7 @@ function displayEntry(entry) {
     entryInteraction.appendChild(entryReacts);
 
     entryDiv.appendChild(entryMessage);
+    entryDiv.appendChild(entryGif);
     entryDiv.appendChild(entryInteraction);
     entryDiv.appendChild(entryComments);
 
