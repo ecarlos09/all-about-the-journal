@@ -1,7 +1,9 @@
 /* FONTS */
 
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
-
+:root {
+    --button-size: 50px;
+}
 
 * {
     box-sizing: border-box;
@@ -150,24 +152,63 @@ input[type="button"], input[type="submit"] {
     background: whitesmoke;
     border-radius: 1000px;
     padding: 1em;
-    margin-left: 1em;
-    margin-right: 2em;
     outline: none;
 }
 
+.react-btns {
+    width: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: 1em;
+}
+
 button {
-    width: 25px;
-    height: 25px;
+    width: var(--button-size);
+    height: var(--button-size);
     background: rgb(61, 61, 61);
-    border-radius: 100%;
+    border-radius: 1000px;
 	color: inherit;
 	border: none;
-	padding: 1em;
-    /* margin: 0.2em; */
 	font: inherit;
 	cursor: pointer;
 	outline: none;
     text-align: center;
+    /* z-index: 1; */
+}
+
+.hide {
+    display: none;
+}
+
+
+
+.react-btn {
+    /* border: 10px solid transparent; */
+    z-index: 2;
+}
+
+.react-num {
+    height:  inherit;
+    width:  inherit;
+    position: relative;
+
+    text-align: center;
+    line-height: var(--button-size);
+    background-color: rgb(22, 22, 22);
+    padding: inherit;
+    border-radius: inherit;
+    color: white;
+
+ 
+    z-index: 0;
+
+}
+
+.react-btn:hover > .hide {
+    display: block;
+
+   
 }
 
 /* ANIMATIONS */
