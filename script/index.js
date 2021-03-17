@@ -98,14 +98,12 @@ timeline.addEventListener('keyup', (e) => {
 
 function displayEntry(entry) {
     const id = entry.id;
-    const date = entry.date;
+    const date = new Date(entry.date);
     const message = entry.message;
     const gifURL = entry.gif || null;
     const comments = entry.comments;
     const reacts = entry.reacts;
     
-    console.log(date);
-
     const entryDiv = document.createElement("div");
     const entryDate = document.createElement("div");
     const entryMessage = document.createElement("div");
@@ -125,7 +123,9 @@ function displayEntry(entry) {
 
     
     // DATE
-    entryDate.textContent = date;
+    const timeString = `${date.getHours() % 12 || 12}:${date.getMinutes().toString().padStart(2,'0')}`
+    const dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    entryDate.textContent = timeString + " on " + dateString;
 
     // MESSAGE
     entryMessage.textContent = message;
