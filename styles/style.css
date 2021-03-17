@@ -37,19 +37,17 @@ h1 {
 
 /* FORM */
 
-#form-container{
+#form-container {
     border: 3px solid black;
     width: 60%;
     margin: 50px auto 50px auto;
 }
 
 form {
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 #form-buttons {
@@ -58,7 +56,6 @@ form {
     justify-content: flex-end;
     width: 100%;
     position: relative;
-   
     right: 5px
 }
 
@@ -66,7 +63,6 @@ textarea {
     width: 100%;
     border: none;
     resize: none;
-    
     height: 15vh;
     font-size: 1em;
     padding: 10px;
@@ -82,58 +78,43 @@ input[type="button"], input[type="submit"] {
 #gif-form{
     background-color:grey;
     text-align: center;
-    display:none;
-    padding:10px;
-    
+    display: none;
+    padding: 10px;
 }
 
-#gifImage{
-    display:none;
+#gifImage {
+    display: none;
 }
 
-#gif-form-btns{
+#gif-form-btns {
     display: flex;
     margin: 10px;
 }
 
-#close-gif-section{
+#close-gif-section {
     position: relative;
-    bottom:30px;
-    left:75px;
+    bottom: 30px;
+    left: 75px;
 }
 
-/* TIMELINE */ 
- /* #journal-timeline {
-    display: flex;
+/* TIMELINE */
+
+#journal-timeline {
+    display: inline-flex;
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    width: 100%;
-    margin:auto;
-
-    text-align: center;
-    padding:10px;
-} */
-
-#journal-timeline {
     width: 80%;
-    /* height: 100vh; */
-    margin: 0 auto;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
 }
-
-
-.grid:after {
-    content: '';
-    display: inline;
-    clear:both;
-  }
-
 
 /* POSTS */
 
-/* #secondHalf{
-    display:flex;
-    width:100%;
+#secondHalf {
+    display: flex;
+    width: 100%;
     justify-content: center;
 } */
 
@@ -148,7 +129,17 @@ input[type="button"], input[type="submit"] {
     height: auto;
     box-shadow: 0 5px 4px 0 rgba(0,0,0,0.2);
     /* background-color: rgb(199, 199, 199); */
-    
+
+}
+
+.entry-date {
+    /* position: absolute; */
+    float: right;
+    padding: 1em;
+}
+
+.entry-box .time-text {
+    margin-right: 1em;
 }
 
 .message-box {
@@ -166,6 +157,17 @@ input[type="button"], input[type="submit"] {
     width: 100%;
     height: auto;
     /* overflow: hidden; */
+}
+
+.comment-btn{
+    background:rgb(32, 32, 32);
+}
+.comments-box {
+    background-color: rgb(68, 68, 68);
+    color: white;
+    padding: 1em;
+    width: 80%;
+    margin-top: 1em;
 }
 
 .interaction-box {
@@ -217,7 +219,8 @@ button {
 	cursor: pointer;
 	outline: none;
     text-align: center;
-    /* z-index: 1; */
+    padding: 1em;
+    margin: 5px;
 }
 
 .hide {
@@ -248,8 +251,22 @@ button {
 
 .react-btn:hover > .hide {
     display: block;
-
+}
    
+
+.reactBtn1 {
+    background-image: url('../assets/smile.png');
+    background-size: cover;
+}
+
+.reactBtn2 {
+    background-image: url('../assets/laugh.png');
+    background-size: cover;
+}
+
+.reactBtn3 {
+    background-image: url('../assets/virusEmoji.png');
+    background-size: cover;
 }
 
 /* ANIMATIONS */

@@ -8,9 +8,13 @@
 
     <link rel="stylesheet" href="styles/style.css">
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+<<<<<<< HEAD
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <!-- <script  src="https://cdn.jsdelivr.net/npm/macy@2"></script> -->
 
+=======
+    <script defer src="./script/audio.js"></script>
+>>>>>>> staging
     <script defer src="bundle.js"></script>
 
     <title>Consoul.log</title>
@@ -20,13 +24,15 @@
     <header>
         <h1>Consoul.log</h1>
     </header>
-
+    <audio src="./assets/audio/photoSnap.mp3" id="audio"></audio>
     <main class="container">
         <div id="form-container">
             <form id="journal-entry">
                 <textarea name="journal-entry" form="journal-entry" cols="30" rows="10"
-                    placeholder="Let us know your thoughts here...(max 300)" maxlength="300"></textarea>
-                <input id="gifImage" type="image">    
+                    placeholder="Let us know your thoughts here...(max 300)" maxlength="300">
+                </textarea>
+                <div id="selected-gif"></div>
+                <!-- <img id="gifImage"> -->
                 <div id="form-buttons">       
                     <input id="gif-btn" type="button" value="GIF">
                     <input id="post-btn" type="submit" value="Post">
@@ -40,17 +46,47 @@
                 <label for="giphy-search">Search for a Giphy</label>
                 <input type="search" id="giphy-search">
                 <div id="gif-form-btns">
-                    <input id= "gifPreviewBtn" type="submit" value="Preview">
-                    <input id= "addGiphy" type="button" value="Add">
+                    <input id="gifPreviewBtn" type="submit" value="Preview">
+                    <input id="addGiphy" type="button" value="Add">
                 </div>
             </form>
 
         </div>
+<<<<<<< HEAD
         <!-- <div id="secondHalf"> -->
         <section id="journal-timeline" class="grid">
             <div class="column"></div>
             <div class="column"></div>
             <div class="column"></div>
+=======
+
+        <section id="search-bar">
+            <form>
+                <input type="text" id="search" placeholder="search entries by keyword ..."/>
+                <input type="submit" id="search-btn" value="search">
+            </form>
+
+            <div id="search-message">
+
+            </div>
+        </section>
+
+        <div id="timeline-sort">
+            <label for="sort-dropdown"></label>
+            <select name="sort-dropdown" id="sort-dropdown">
+                <option value="recent">Recent</option>
+                <option value="oldest">Oldest</option>
+                <option value="reacts">Reacts</option>
+                <option value="comments">Comments</option>
+            </select>
+        </div>
+
+        <div id="secondHalf">
+
+
+        <section id="journal-timeline">
+
+>>>>>>> staging
         </section>
         
         <!-- </div> -->
