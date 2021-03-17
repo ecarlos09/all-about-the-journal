@@ -4,9 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles/style.css"> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+
+
     <script defer src="bundle.js"></script>
+
     <title>Consoul.log</title>
 </head>
 
@@ -18,28 +24,48 @@
 <!-- <button type="button" class="play-sound-btn">Play Sound</button> -->
     <main class="container">
 
-<div id="form-container">
-    <form id="journal-entry">
-        <textarea name="journal-entry" form="journal-entry" cols="30" rows="10"
-            placeholder="Let us know your thoughts here...(max 300)" maxlength="300"></textarea>
-        <input id="gifImage" type="image">    
-        <div id="form-buttons">       
-            <input id="gif-btn" type="button" value="GIF">
-            <input id="post-btn" type="submit" value="Post">
-        </div>
-    </form>
+        <div id="form-container">
+            <form id="journal-entry">
+                <textarea name="journal-entry" form="journal-entry" cols="30" rows="10"
+                    placeholder="Let us know your thoughts here...(max 300)" maxlength="300">
+                </textarea>
+                <div id="selected-gif"></div>
+                <!-- <img id="gifImage"> -->
+                <div id="form-buttons">       
+                    <input id="gif-btn" type="button" value="GIF">
+                    <input id="post-btn" type="submit" value="Post">
+                </div>
+          </form>
+       
+            <form id="gif-form">
+                <div id ="previewGifSection"></div>
+                <label for="giphy-search">Search for a Giphy</label>
+                <input type="search" id="giphy-search">
+                <div id="gif-form-btns">
+                    <input id="gifPreviewBtn" type="submit" value="Preview">
+                    <input id="addGiphy" type="button" value="Add">
+                </div>
+            </form>
+          </div>
 
-    <form id="gif-form">
-        <div id ="previewGifSection"></div>
-        <label for="giphy-search">Search for a Giphy</label>
-        <input type="search" id="giphy-search">
-        <div id="gif-form-btns">
-            <input id= "gifPreviewBtn" type="submit" value="Preview">
-            <input id= "addGiphy" type="button" value="Add">
+        <div id="timeline-sort">
+            <label for="sort-dropdown"></label>
+            <select name="sort-dropdown" id="sort-dropdown">
+                <option value="recent">Recent</option>
+                <option value="oldest">Oldest</option>
+                <option value="reacts">Reacts</option>
+                <option value="comments">Comments</option>
+            </select>
         </div>
-    </form>
 
-</div>
+        <div id="secondHalf">
+
+        <section id="journal-timeline">
+
+        </section>
+        
+        </div>
+    </main>
 
 
 <div id="secondHalf">

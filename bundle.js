@@ -66,6 +66,7 @@ module.exports = {get, add, create};
 
 // GIPHY Elements
 const addGiphyButton = document.getElementById('addGiphy')
+const selectedGif = document.getElementById('selected-gif')
 const gifImage = document.getElementById('gifImage')
 const gifBtn = document.getElementById('gif-btn')
 const gifPreviewBtn = document.getElementById('gifPreviewBtn')
@@ -74,6 +75,8 @@ const gifForm = document.getElementById('gif-form')
 const APIkey = "aWqPT5uBm54EQ5x9ooFj4TpWjXxF0mNh";
 const entryForm = document.getElementById("journal-entry");
 const formContainer = document.getElementById('form-container')
+const previewimage = document.createElement('img')
+
 
 
 
@@ -96,14 +99,15 @@ function showGiphyForm(){
 
 function searchGiphy(event){
     event.preventDefault();
-    let query = document.getElementById("giphy-search").value.trim()
+    let gifSearchBar = document.getElementById("giphy-search")
+    let query = gifSearchBar.value.trim()
     let url =`https://api.giphy.com/v1/gifs/search?api_key=${APIkey}&q=${query}&limit=1&offset=0&rating=g&lang=en`
     fetch(url)
     .then(response => response.json())
     .then (content => {
-        let image = document.createElement('img')
-        image.src = content.data[0].images.fixed_width.url;
-        previewGifSection.appendChild(image)
+        previewimage.src = content.data[0].images.fixed_width.url;
+        previewGifSection.appendChild(previewimage)
+      
         
     })
     .catch(err =>  console.log(err))
@@ -117,32 +121,38 @@ function searchGiphy(event){
         fetch(url)
         .then(response => response.json())
         .then (content => {
-            let image = document.createElement('img')
-            gifImage.src = content.data[0].images.fixed_width.url;
+            const gif = document.createElement('img')
+            gif.src = content.data[0].images.fixed_width.url;
+            gif.style.display = "block";
+            console.log(selectedGif);
+            selectedGif.appendChild(gif);
+            showGiphyForm();
+            gifForm.reset()
 
-        gifImage.style.display = "block";
-        gifForm.style.display = "none"
-        entryForm.style.width = "100%";
+            // gifImage.src = content.data[0].images.fixed_width.url;
+            // // console.log(gifImage.src);
+            // gifImage.style.display = "block";
+            // gifForm.style.display = "none"
+            // entryForm.style.width = "100%";
+            
+            // previewimage.src = "" 
         })
     }
 
+function clearGiphy(){
+    selectedGif.innerHTML = '';
+}
 
-module.exports = {showGiphyForm,searchGiphy,addGiphy}
-},{}],4:[function(require,module,exports){
+
+module.exports = {showGiphyForm,searchGiphy,addGiphy, clearGiphy}
+},{}],3:[function(require,module,exports){
 
 const hostURL = "http://localhost:3000/" 
 const giphy = require('./giphy')
 const fetchers = require('./fetchers');
-const audio = require('./audio');
 
-const sound = new Audio();        
-sound.src = "../assets/photoSnap.mp3";  // set the resource location 
-sound.oncanplaythrough = function(){   // When the sound has completely loaded
-    sound.readyToRock = true;    // flag sound is ready to play                                
-};
-sound.onerror = function(){      
-    console.log("Sound file SoundFileURL.mp3 failed to load.")
-};
+const sort = require('./sorters');
+
 
 // Create fetchers
 const getAllEntries = fetchers.get("entries/");
@@ -154,13 +164,14 @@ const createEntry = (message) => fetchers.create(message);
 
 // HTML Elements
 const timeline = document.getElementById('journal-timeline');
+const sortBtn = document.getElementById('sort-dropdown');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
 const formContainer = document.getElementById('form-container')
 
 // GIPHY Elements
 const addGiphyButton = document.getElementById('addGiphy')
-const gifImage = document.getElementById('gifImage')
+const selectedGif = document.getElementById('selected-gif')
 const gifBtn = document.getElementById('gif-btn')
 const gifPreviewBtn = document.getElementById('gifPreviewBtn')
 const previewGifSection = document.getElementById('previewGifSection')
@@ -169,7 +180,6 @@ const APIkey = "aWqPT5uBm54EQ5x9ooFj4TpWjXxF0mNh";
 
 
 //GIPHY
-
 gifBtn.addEventListener('click', giphy.showGiphyForm)
 gifForm.addEventListener('submit', giphy.searchGiphy)
 addGiphyButton.addEventListener('click', giphy.addGiphy)
@@ -180,10 +190,20 @@ postBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const date = Date.now();
     const message = entryForm['journal-entry'].value;
+
+
+    const gif = selectedGif.firstChild;
+    const gifURL = gif ? gif.src : null;
+    console.log( selectedGif.firstChild);
+    const data = {message: message, gif: gifURL};
+
     const gif = gifImage.src;
     const data = {message: message, gif: gif, date: date};
+
     
     createEntry(data).then(entry => displayEntry(entry));
+    entryForm.reset()
+    giphy.clearGiphy();
 })
 
 //Sound effect for post button
@@ -200,6 +220,32 @@ function playSound(){
 getAllEntries.then(entries => {
     entries.forEach(entry => displayEntry(entry))
 });
+
+// Sort entries
+sortBtn.addEventListener('change', (e) => {
+    clearTimeline();
+
+    getAllEntries.then(entries => {
+        switch (e.target.value) {
+            case 'recent':
+                entries = sort.byRecent(entries);
+                break;
+            case 'oldest':
+                entries = sort.byOldest(entries);
+                break;
+            case 'reacts':
+                entries = sort.byReacts(entries);
+                break;
+            case 'comments':
+                entries = sort.byComments(entries);
+                break;
+            default:
+                break;
+        }
+        
+        entries.forEach(entry => displayEntry(entry))
+    });
+})
 
 
 // Listen for journal entry button clicks
@@ -253,10 +299,10 @@ function displayEntry(entry) {
     const id = entry.id;
     const date = new Date(entry.date);
     const message = entry.message;
-    const gifURL = entry.gif || null;
+    const gifURL = entry.gif;
     const comments = entry.comments;
     const reacts = entry.reacts;
-    
+
     const entryDiv = document.createElement("div");
     const entryDate = document.createElement("div");
     const entryMessage = document.createElement("div");
@@ -289,12 +335,7 @@ function displayEntry(entry) {
     // MESSAGE
     entryMessage.textContent = message;
 
-    // GIF
-    if(gifURL){
-        const gif = document.createElement('img');
-        gif.src = gifURL;
-        entryGif.appendChild(gif);
-    }
+    
     
 
     // COMMENTS 
@@ -332,7 +373,15 @@ function displayEntry(entry) {
 
     entryDiv.appendChild(entryDate);
     entryDiv.appendChild(entryMessage);
-    entryDiv.appendChild(entryGif);
+
+    // GIF
+    if(gifURL){
+        const gif = document.createElement('img');
+        gif.src = gifURL;
+        entryGif.appendChild(gif);
+        entryDiv.appendChild(entryGif);
+    }
+   
     entryDiv.appendChild(entryInteraction);
     entryDiv.appendChild(entryComments);
 
@@ -356,23 +405,43 @@ function loadComment(comment){
     return commentElement;   
 }
 
+function clearTimeline() {
+    timeline.innerHTML= "";
+}
 
 
+},{"./fetchers":1,"./giphy":2,"./sorters":4}],4:[function(require,module,exports){
+function byRecent(entries) {
+    entries.sort((a,b) => {
+        return (new Date(a.date) - new Date(b.date))
+    });
+    return entries;
+}
+
+function byOldest(entries) {
+    entries.sort((a,b) => {
+        return -(new Date(a.date) - new Date(b.date))
+    });
+    return entries;
+}
+
+function byReacts(entries) {
+    entries.sort((a,b) => {
+        const adder = (sum, next) => sum + next;
+        return a.reacts.reduce(adder) - b.reacts.reduce(adder);
+    });
+    return entries;
+}
+
+function byComments(entries) {
+    entries.sort((a,b) => {
+        return a.comments.length - b.comments.length;
+    });
+    return entries;
+}
+
+module.exports = {byRecent, byOldest, byReacts, byComments}
 
 
+},{}]},{},[3]);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-},{"./audio":1,"./fetchers":2,"./giphy":3}]},{},[4]);

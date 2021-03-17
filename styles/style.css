@@ -63,7 +63,7 @@ textarea {
     border: none;
     resize: none;
     
-    height: 20vh;
+    height: 15vh;
     font-size: 1em;
     padding: 10px;
     border-radius: 10px;
@@ -107,24 +107,41 @@ input[type="button"], input[type="submit"] {
     left:75px;
 }
 
-/* TIMELINE */
-/* #journal-timeline {
-    display: flex;
-    flex-flow: column-reverse wrap;
+/* TIMELINE */ 
+ #journal-timeline {
+    display: inline-flex;
+    flex-flow: row wrap;
     justify-content: center;
-} */
+    width:80%;
+    margin:auto;
+
+    text-align: center;
+    padding:10px;
+}
+
+
 
 
 /* POSTS */
 
-.entry-box
-     {padding: 2em;
-      border: black solid 2px;
-      border-radius: 10px;
-      flex: 1 1 auto;
-      min-width: 250px;
-      margin: 20px;
-     } 
+
+
+#secondHalf{
+    display:flex;
+    width:100%;
+    justify-content: center;
+}
+
+.entry-box {
+    padding: 2em;
+    border: black solid 2px;
+    border-radius: 10px;
+    margin-bottom: 2em;
+    flex: 1 1 auto;
+    max-width: 400px;
+    margin:20px;
+    
+}
 
 
 .entry-date {
@@ -142,6 +159,8 @@ input[type="button"], input[type="submit"] {
     padding: 2em;
     word-wrap: break-word;
     margin: 1em;
+    word-wrap: break-word;
+    border-radius: 10px;
 }
 
 .gif-box img{
