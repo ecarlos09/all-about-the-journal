@@ -164,31 +164,50 @@ postBtn.addEventListener('click', (e) => {
     const data = {message: message, gif: gifURL, date: date};
 
     createEntry(data).then(entry => displayEntry(entry));
-    msnry.layout()
+    // msnry.layout()
     entryForm.reset()
     giphy.clearGiphy();
 })
 
 // Layout
 
-let msnry = new Masonry( '.grid', {
-    // options
-    columnWidth: '.entry-box',
-    itemSelector: '.entry-box',
-    percentPosition: true,
-    // gutter: 0,
-    horizontalOrder: true,
-    fitWidth: true,
-    // percentPosition: true,
-    initLayout: true,
-});
+// let msnry = new Masonry( timeline, {
+//     // options
+//     columnWidth: '.entry-box',
+//     itemSelector: '.entry-box',
+//     percentPosition: true,
+//     // gutter: 0,
+//     horizontalOrder: true,
+//     fitWidth: true,
+//     // percentPosition: true,
+//     initLayout: true,
+// });
+
+
+
 
 
 // Load entries
 getAllEntries.then(entries => {
     entries.forEach(entry => displayEntry(entry))
-    // msnry.layout()
+    
 });
+
+const pckry = new Packery( timeline, {
+    // options
+    itemSelector: '.entry-box',
+    // columnWidth: '.entry-box',
+  });
+  
+
+
+
+// imgLoad.on('done', () =>  {
+//     pckry.layout()
+//     console.log('images loaded');
+// })  
+
+
 
 // Sort entries
 sortBtn.addEventListener('change', (e) => {
@@ -218,8 +237,6 @@ sortBtn.addEventListener('change', (e) => {
 
 
 
-const imgLoad=imagesLoaded(timeline, () => msnry.layout());
-imgLoad.on('done', () =>  msnry.layout())  
 
 
 // Listen for journal entry button clicks
@@ -337,13 +354,6 @@ function displayEntry(entry) {
     // MESSAGE
     entryMessage.textContent = message;
 
-    // GIF
-    if(gifURL){
-        const gif = document.createElement('img');
-        gif.src = gifURL;
-        entryGif.appendChild(gif);
-    }
-    
     // COMMENTS 
     const commentBtn = document.createElement("button");
     commentBtn.className = "comment-btn"
@@ -403,10 +413,14 @@ function displayEntry(entry) {
 
     timeline.prepend(entryDiv);
     
-    imgLoad.on('done', () => {
-        msnry.prepended(entryDiv);
-        msnry.layout();
-    })
+    // imgLoad.on('done', () => {
+        
+    //     // msnry.layout();
+    // })
+    
+    pckry.prepended(entryDiv);
+    imagesLoaded(timeline, () => pckry.layout());
+    // pckry.layout();
     
 
     

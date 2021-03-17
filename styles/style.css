@@ -1,8 +1,11 @@
 /* FONTS */
 
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
 :root {
     --button-size: 25px;
+    --button-colour: rgb(48, 48, 48);
+    --column-num: 3;
 }
 
 * {
@@ -12,7 +15,6 @@
     font-family: 'Varela Round', sans-serif;
 }
 
-
 .container {
     width: 90%;
     margin: auto;
@@ -21,7 +23,11 @@
 /* HEADER */
 
 header {
+    margin: auto;
+    text-align: center;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
 }
 
@@ -29,25 +35,37 @@ h1 {
     display: inline;
     margin-top: 40px;
     font-size: 5em;
+    font-family: 'Space Mono', monospace;
     white-space: nowrap;
     overflow: hidden;
     color: black;
     border-right: solid 2px black;
 }
 
+h3 {
+    display: inline;
+    font-family: 'Space Mono', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    color: black;
+}
+
 /* FORM */
 
 #form-container {
-    border: 3px solid black;
+    border: 5px solid rgb(48, 48, 48);
+    border-radius: 10px;
     width: 60%;
     margin: 50px auto 50px auto;
+    z-index: 10;
 }
 
-form {
+#journal-entry {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 #form-buttons {
@@ -55,6 +73,7 @@ form {
     flex-direction: row;
     justify-content: flex-end;
     width: 100%;
+    padding: 20px;
     position: relative;
     right: 5px
 }
@@ -62,21 +81,44 @@ form {
 textarea {
     width: 100%;
     border: none;
+    outline: none;
     resize: none;
     height: 15vh;
     font-size: 1em;
-    padding: 10px;
-    border-radius: 10px;
+    margin: 10px;
+    padding: 1em;
+    border-radius: inherit;
+    z-index: 1;
 }
 
 input[type="button"], input[type="submit"] {
     margin: 0px 5px;
-    padding: 5px;
-    font-size: 1em;
+    padding: 1em 2em;
+    /* font-size: 1em; */
+    border: none;
+    border-radius: 100px;
+    background: var(--button-colour);
+    color: #ffffff;
+    cursor: pointer;
+    text-align: center;
 }
 
-#gif-form{
-    background-color:grey;
+input[type="button"]:hover, input[type="submit"]:hover {
+    background: #7c7c7c;
+}
+
+input[type="text"], input[type="search"], select {
+    border: 2px solid rgb(32, 32, 32);
+    background: rgb(255, 255, 255);
+    border-radius: 1000px;
+    padding: 1em;
+    outline: none;
+}
+
+/* GIF FORM */
+
+#gif-form {
+    background-color: grey;
     text-align: center;
     display: none;
     padding: 10px;
@@ -97,22 +139,51 @@ input[type="button"], input[type="submit"] {
     left: 75px;
 }
 
+#timeline-viewing {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    margin: 10px auto;
+    padding: 1em;
+}
+
+#search-bar {
+    flex-grow: 1;
+}
+
+#search-message {
+    text-align: center;
+    width: 60%;
+    margin: auto;
+    padding: 1em;
+}
+
 /* TIMELINE */
 
 #journal-timeline {
-    display: inline-flex;
+    /* display: inline-flex;
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    width: 80%;
+    width: 80%; */
     margin: auto;
-    text-align: center;
-    padding: 10px;
+    width: 80%;
+    overflow: auto;
+    /* text-align: center;
+    padding: 10px; */
+}
+
+#journal-timeline::after {
+    content: '';
+    display: block;
+    clear: both;
 }
 
 /* POSTS */
 
-#secondHalf {
+/* #secondHalf {
     display: flex;
     width: 100%;
     justify-content: center;
@@ -120,21 +191,20 @@ input[type="button"], input[type="submit"] {
 
 .entry-box {
     /* padding: 1em; */
-        /* height: auto; */
-    margin: 20px 10px;
-    /* flex: 1 1 auto; */
+    /* height: auto; */
     float: left;
-    border-radius: 10px;  
-    width: 400px;
-    height: auto;
-    box-shadow: 0 5px 4px 0 rgba(0,0,0,0.2);
+    margin: 20px 10px;
+    background-color: rgb(226, 226, 226);
+    border-radius: 10px;
+    width: calc((100% - 2*var(--column-num)*10px)/var(--column-num));
+    box-shadow: 0 5px 4px 0 rgba(0, 0, 0, 0.2);
     /* background-color: rgb(199, 199, 199); */
-
 }
 
 .entry-date {
     /* position: absolute; */
-    float: right;
+    text-align: right;
+    color: rgb(165, 165, 165);
     padding: 1em;
 }
 
@@ -143,7 +213,6 @@ input[type="button"], input[type="submit"] {
 }
 
 .message-box {
-    background-color: rgb(226, 226, 226);
     padding: 1em;
     border-radius: 10px 10px 0px 0px;
     text-align: left;
@@ -152,16 +221,17 @@ input[type="button"], input[type="submit"] {
     /* border-radius: 10px; */
 }
 
-.gif-box > img{
+.gif-box>img {
     display: block;
     width: 100%;
     height: auto;
     /* overflow: hidden; */
 }
 
-.comment-btn{
-    background:rgb(32, 32, 32);
+.comment-btn {
+    background: rgb(32, 32, 32);
 }
+
 .comments-box {
     background-color: rgb(68, 68, 68);
     color: white;
@@ -175,28 +245,22 @@ input[type="button"], input[type="submit"] {
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
-
     background-color: rgb(226, 226, 226);
     padding: 1em;
-    border-radius: 0px 0px 10px 10px ;
+    border-radius: 0px 0px 10px 10px;
     /* margin: 1em; */
     word-wrap: break-word;
 }
 
 .comment-input {
     flex-grow: 2;
-    border: 2px solid rgb(32, 32, 32);
-    background: whitesmoke;
-    border-radius: 1000px;
-    padding: 1em;
-    outline: none;
 }
 
 .comments-box {
     background-color: rgb(68, 68, 68);
     color: white;
     padding: 1em;
-    width: 80%;
+    width: 100%;
     margin-top: 1em;
 }
 
@@ -213,11 +277,11 @@ button {
     height: var(--button-size);
     background: rgb(61, 61, 61);
     border-radius: 1000px;
-	color: inherit;
-	border: none;
-	font: inherit;
-	cursor: pointer;
-	outline: none;
+    color: inherit;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
     text-align: center;
     padding: 1em;
     margin: 5px;
@@ -233,26 +297,21 @@ button {
 }
 
 .react-num {
-    height:  inherit;
-    width:  inherit;
+    height: inherit;
+    width: inherit;
     position: relative;
-
     text-align: center;
     line-height: var(--button-size);
     background-color: rgb(22, 22, 22);
     padding: inherit;
     border-radius: inherit;
     color: white;
-
- 
     z-index: 0;
-
 }
 
-.react-btn:hover > .hide {
+.react-btn:hover>.hide {
     display: block;
 }
-   
 
 .reactBtn1 {
     background-image: url('../assets/smile.png');
@@ -275,12 +334,16 @@ h1 {
     animation: animated-text 3s steps(29, end) 1s 1 normal both, animated-cursor 900ms steps(29, end) infinite;
 }
 
+h3 {
+    animation: animated-text 3s steps(29, end) 4s 1 normal both
+}
+
 @keyframes animated-text {
     from {
         width: 0;
     }
     to {
-        width: 450px;
+        width: 600px;
     }
 }
 
@@ -290,5 +353,22 @@ h1 {
     }
     to {
         border-right-color: transparent;
+    }
+}
+
+@media (max-width: 576px) {  }
+    :root {
+        --column-num: 1
+    }
+
+@media (min-width: 576px) and (max-width: 1200px) {  
+    :root {
+        --column-num: 2
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --column-num: 3
     }
 }
