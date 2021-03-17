@@ -53,15 +53,10 @@ module.exports = {get, add, create};
 
 },{}],2:[function(require,module,exports){
 
-
 //GIPHY
 
 // GIPHY Elements
-const addGiphyButton = document.getElementById('addGiphy')
 const selectedGif = document.getElementById('selected-gif')
-const gifImage = document.getElementById('gifImage')
-const gifBtn = document.getElementById('gif-btn')
-const gifPreviewBtn = document.getElementById('gifPreviewBtn')
 const previewGifSection = document.getElementById('previewGifSection')
 const gifForm = document.getElementById('gif-form')
 const APIkey = "aWqPT5uBm54EQ5x9ooFj4TpWjXxF0mNh";
@@ -69,78 +64,60 @@ const entryForm = document.getElementById("journal-entry");
 const formContainer = document.getElementById('form-container')
 const previewimage = document.createElement('img')
 
-
-
-
-function showGiphyForm(){
-    if (gifForm.style.display === "block"){
+function showGiphyForm() {
+    if (gifForm.style.display === "block") {
         gifForm.style.display = "none"
         entryForm.style.width = "100%";
     }
-
-    else{
+    else {
         gifForm.style.display = "block"
         entryForm.style.width = "80%";
         formContainer.style.display = "flex"
-        formContainer.style.justifyContent= "space-between"
+        formContainer.style.justifyContent = "space-between"
     }
-
 }
 
-
-
-function searchGiphy(event){
+function searchGiphy(event) {
     event.preventDefault();
     let gifSearchBar = document.getElementById("giphy-search")
     let query = gifSearchBar.value.trim()
-    let url =`https://api.giphy.com/v1/gifs/search?api_key=${APIkey}&q=${query}&limit=1&offset=0&rating=g&lang=en`
+    let url = `https://api.giphy.com/v1/gifs/search?api_key=${APIkey}&q=${query}&limit=1&offset=0&rating=g&lang=en`
     fetch(url)
-    .then(response => response.json())
-    .then (content => {
-        previewimage.src = content.data[0].images.fixed_width.url;
-        previewGifSection.appendChild(previewimage)
-      
-        
-    })
-    .catch(err =>  console.log(err))
+        .then(response => response.json())
+        .then(content => {
+            previewimage.src = content.data[0].images.fixed_width.url;
+            previewGifSection.appendChild(previewimage)
+        })
+        .catch(err => console.log(err))
 }
 
-
- function addGiphy(event){
-        event.preventDefault()
-        let query = document.getElementById("giphy-search").value.trim()
-        let url =`https://api.giphy.com/v1/gifs/search?api_key=${APIkey}&q=${query}&limit=1&offset=0&rating=g&lang=en`
-        fetch(url)
+function addGiphy(event) {
+    event.preventDefault()
+    let query = document.getElementById("giphy-search").value.trim()
+    let url = `https://api.giphy.com/v1/gifs/search?api_key=${APIkey}&q=${query}&limit=1&offset=0&rating=g&lang=en`
+    fetch(url)
         .then(response => response.json())
-        .then (content => {
+        .then(content => {
             const gif = document.createElement('img')
             gif.src = content.data[0].images.fixed_width.url;
             gif.style.display = "block";
             console.log(selectedGif);
             selectedGif.appendChild(gif);
             showGiphyForm();
-            gifForm.reset()
-
-            // gifImage.src = content.data[0].images.fixed_width.url;
-            // // console.log(gifImage.src);
-            // gifImage.style.display = "block";
-            // gifForm.style.display = "none"
-            // entryForm.style.width = "100%";
-            
-            // previewimage.src = "" 
+            gifForm.reset();
         })
-    }
+}
 
-function clearGiphy(){
+function clearGiphy() {
     selectedGif.innerHTML = '';
 }
 
 
-module.exports = {showGiphyForm,searchGiphy,addGiphy, clearGiphy}
+module.exports = { showGiphyForm, searchGiphy, addGiphy, clearGiphy }
 },{}],3:[function(require,module,exports){
 
-const hostURL = "http://localhost:3000/" 
-const giphy = require('./giphy')
+const hostURL = "http://localhost:3000/";
+const giphy = require('./giphy');
 const fetchers = require('./fetchers');
 const sort = require('./sorters');
 
@@ -157,16 +134,13 @@ const timeline = document.getElementById('journal-timeline');
 const sortBtn = document.getElementById('sort-dropdown');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
-const formContainer = document.getElementById('form-container')
+const formContainer = document.getElementById('form-container');
 
 // GIPHY Elements
-const addGiphyButton = document.getElementById('addGiphy')
-const selectedGif = document.getElementById('selected-gif')
-const gifBtn = document.getElementById('gif-btn')
-const gifPreviewBtn = document.getElementById('gifPreviewBtn')
-const previewGifSection = document.getElementById('previewGifSection')
-const gifForm = document.getElementById('gif-form')
-const APIkey = "aWqPT5uBm54EQ5x9ooFj4TpWjXxF0mNh";
+const addGiphyButton = document.getElementById('addGiphy');
+const selectedGif = document.getElementById('selected-gif');
+const gifBtn = document.getElementById('gif-btn');
+const gifForm = document.getElementById('gif-form');
 
 
 //GIPHY
@@ -174,23 +148,16 @@ gifBtn.addEventListener('click', giphy.showGiphyForm)
 gifForm.addEventListener('submit', giphy.searchGiphy)
 addGiphyButton.addEventListener('click', giphy.addGiphy)
 
-
 // Post button
 postBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const date = Date.now();
     const message = entryForm['journal-entry'].value;
 
-
     const gif = selectedGif.firstChild;
     const gifURL = gif ? gif.src : null;
-    console.log( selectedGif.firstChild);
     const data = {message: message, gif: gifURL};
 
-    const gif = gifImage.src;
-    const data = {message: message, gif: gif, date: date};
-
-    
     createEntry(data).then(entry => displayEntry(entry));
     entryForm.reset()
     giphy.clearGiphy();
@@ -314,9 +281,6 @@ function displayEntry(entry) {
 
     // MESSAGE
     entryMessage.textContent = message;
-
-    
-    
 
     // COMMENTS 
     const commentBtn = document.createElement("button");
