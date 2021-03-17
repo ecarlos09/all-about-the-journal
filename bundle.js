@@ -237,6 +237,7 @@ timeline.addEventListener('keyup', (e) => {
             commentInput.value = "";
 
             addComment(id, commentObj).then(comments => {
+                commentsBox.textContent = "";
                 commentsBox.prepend(loadComment(comments[comments.length -1]));
             });
         }
@@ -325,9 +326,13 @@ function displayEntry(entry) {
     commentInput.placeholder = "say something nice";
 
     if (comments.length > 0) {
+        entryComments.textContent="";
         comments.forEach(comment => {
             entryComments.prepend(loadComment(comment));
         })
+    }
+    else {
+        entryComments.textContent = "No comments!"
     }
 
     // REACTS
