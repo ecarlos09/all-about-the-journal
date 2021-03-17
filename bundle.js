@@ -10,8 +10,9 @@ async function get(route) {
 
 async function create(data) {
     const body = {
+        "date": data.date,
         "message": data.message,
-        "gif": data.gif
+        "gif": data.gif,
     };
 
     const postRoute = "entries/";
@@ -176,12 +177,18 @@ addGiphyButton.addEventListener('click', giphy.addGiphy)
 // Post button
 postBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    const date = Date.now();
     const message = entryForm['journal-entry'].value;
+
 
     const gif = selectedGif.firstChild;
     const gifURL = gif ? gif.src : null;
     console.log( selectedGif.firstChild);
     const data = {message: message, gif: gifURL};
+
+    const gif = gifImage.src;
+    const data = {message: message, gif: gif, date: date};
+
     
     createEntry(data).then(entry => displayEntry(entry));
     entryForm.reset()
@@ -243,12 +250,14 @@ timeline.addEventListener('keyup', (e) => {
 
 function displayEntry(entry) {
     const id = entry.id;
+    const date = new Date(entry.date);
     const message = entry.message;
     const gifURL = entry.gif;
     const comments = entry.comments;
     const reacts = entry.reacts;
 
     const entryDiv = document.createElement("div");
+    const entryDate = document.createElement("div");
     const entryMessage = document.createElement("div");
     const entryGif = document.createElement("div");
     const entryInteraction = document.createElement("div");
@@ -256,12 +265,25 @@ function displayEntry(entry) {
     const entryReacts = document.createElement("div");
 
     entryDiv.id = `${id}`;
+    entryDate.className = "entry-date";
     entryDiv.className = "entry-box";
     entryMessage.className = "message-box";
     entryGif.className = "gif-box";
     entryInteraction.className = "interaction-box"
     entryComments.className = "comments-box";
     entryReacts.className = "react-btns";
+    
+    // DATE
+    const timeString = `${date.getHours() % 12 || 12}:${date.getMinutes().toString().padStart(2,'0')}`
+    const dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    const timeDiv = document.createElement("span");
+    const dateDiv = document.createElement("span");
+    timeDiv.className = "time-text";
+    timeDiv.textContent = timeString;
+    dateDiv.className = "date-text";
+    dateDiv.textContent = dateString;
+    entryDate.appendChild(timeDiv);
+    entryDate.appendChild(dateDiv);
 
     // MESSAGE
     entryMessage.textContent = message;
@@ -302,6 +324,7 @@ function displayEntry(entry) {
     entryInteraction.appendChild(commentInput);
     entryInteraction.appendChild(entryReacts);
 
+    entryDiv.appendChild(entryDate);
     entryDiv.appendChild(entryMessage);
 
     // GIF
