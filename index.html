@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="styles/style.css">
-    
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+
     <script defer src="bundle.js"></script>
+
     <title>Consoul.log</title>
 </head>
 
@@ -21,8 +23,10 @@
         <div id="form-container">
             <form id="journal-entry">
                 <textarea name="journal-entry" form="journal-entry" cols="30" rows="10"
-                    placeholder="Let us know your thoughts here...(max 300)" maxlength="300"></textarea>
-                <input id="gifImage" type="image">    
+                    placeholder="Let us know your thoughts here...(max 300)" maxlength="300">
+                </textarea>
+                <div id="selected-gif"></div>
+                <!-- <img id="gifImage"> -->
                 <div id="form-buttons">       
                     <input id="gif-btn" type="button" value="GIF">
                     <input id="post-btn" type="submit" value="Post">
@@ -36,12 +40,13 @@
                 <label for="giphy-search">Search for a Giphy</label>
                 <input type="search" id="giphy-search">
                 <div id="gif-form-btns">
-                    <input id= "gifPreviewBtn" type="submit" value="Preview">
-                    <input id= "addGiphy" type="button" value="Add">
+                    <input id="gifPreviewBtn" type="submit" value="Preview">
+                    <input id="addGiphy" type="button" value="Add">
                 </div>
             </form>
 
         </div>
+
         <div id="timeline-sort">
             <label for="sort-dropdown"></label>
             <select name="sort-dropdown" id="sort-dropdown">
@@ -51,10 +56,14 @@
                 <option value="comments">Comments</option>
             </select>
         </div>
+
+        <div id="secondHalf">
+
         <section id="journal-timeline">
 
         </section>
         
+        </div>
     </main>
 
 </body>
