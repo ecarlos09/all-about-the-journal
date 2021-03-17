@@ -2,7 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 :root {
-    --button-size: 50px;
+    --button-size: 25px;
 }
 
 * {
@@ -11,6 +11,7 @@
     margin: 0;
     font-family: 'Varela Round', sans-serif;
 }
+
 
 .container {
     width: 90%;
@@ -39,7 +40,7 @@ h1 {
 #form-container{
     border: 3px solid black;
     width: 60%;
-    margin: auto;
+    margin: 50px auto 50px auto;
 }
 
 form {
@@ -79,7 +80,6 @@ input[type="button"], input[type="submit"] {
 }
 
 #gif-form{
-
     background-color:grey;
     text-align: center;
     display:none;
@@ -103,59 +103,69 @@ input[type="button"], input[type="submit"] {
 }
 
 /* TIMELINE */ 
- #journal-timeline {
-    display: inline-flex;
+ /* #journal-timeline {
+    display: flex;
     flex-flow: row wrap;
+    align-items: flex-start;
     justify-content: center;
-    width:80%;
+    width: 100%;
     margin:auto;
 
     text-align: center;
     padding:10px;
+} */
+
+#journal-timeline {
+    width: 80%;
+    /* height: 100vh; */
+    margin: 0 auto;
 }
 
 
+.grid:after {
+    content: '';
+    display: inline;
+    clear:both;
+  }
 
 
 /* POSTS */
 
-#secondHalf{
+/* #secondHalf{
     display:flex;
     width:100%;
     justify-content: center;
-}
+} */
 
 .entry-box {
-    padding: 2em;
-    border: black solid 2px;
-    border-radius: 10px;
-    margin-bottom: 2em;
-    flex: 1 1 auto;
-    max-width: 400px;
-    margin:20px;
+    /* padding: 1em; */
+        /* height: auto; */
+    margin: 20px 10px;
+    /* flex: 1 1 auto; */
+    float: left;
+    border-radius: 10px;  
+    width: 400px;
+    height: auto;
+    box-shadow: 0 5px 4px 0 rgba(0,0,0,0.2);
+    /* background-color: rgb(199, 199, 199); */
     
 }
 
 .message-box {
-    background-color: rgb(199, 199, 199);
-    padding: 2em;
-    margin: 1em;
+    background-color: rgb(226, 226, 226);
+    padding: 1em;
+    border-radius: 10px 10px 0px 0px;
+    text-align: left;
+    /* margin: 1em; */
     word-wrap: break-word;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 
-.gif-box img{
+.gif-box > img{
+    display: block;
     width: 100%;
     height: auto;
     /* overflow: hidden; */
-}
-
-.comments-box {
-    background-color: rgb(68, 68, 68);
-    color: white;
-    padding: 1em;
-    width: 80%;
-    margin-top: 1em;
 }
 
 .interaction-box {
@@ -163,8 +173,13 @@ input[type="button"], input[type="submit"] {
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
-}
 
+    background-color: rgb(226, 226, 226);
+    padding: 1em;
+    border-radius: 0px 0px 10px 10px ;
+    /* margin: 1em; */
+    word-wrap: break-word;
+}
 
 .comment-input {
     flex-grow: 2;
@@ -173,6 +188,14 @@ input[type="button"], input[type="submit"] {
     border-radius: 1000px;
     padding: 1em;
     outline: none;
+}
+
+.comments-box {
+    background-color: rgb(68, 68, 68);
+    color: white;
+    padding: 1em;
+    width: 80%;
+    margin-top: 1em;
 }
 
 .react-btns {
@@ -200,8 +223,6 @@ button {
 .hide {
     display: none;
 }
-
-
 
 .react-btn {
     /* border: 10px solid transparent; */

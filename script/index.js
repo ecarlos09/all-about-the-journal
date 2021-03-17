@@ -41,13 +41,34 @@ postBtn.addEventListener('click', (e) => {
     const gif = gifImage.src;
     const data = {message: message, gif: gif};
     createEntry(data).then(entry => displayEntry(entry));
-    
+    msnry.layout()
 })
+
+// Layout
+
+let msnry = new Masonry( '.grid', {
+    // options
+    columnWidth: '.entry-box',
+    itemSelector: '.entry-box',
+    percentPosition: true,
+    // gutter: 0,
+    horizontalOrder: true,
+    fitWidth: true,
+    // percentPosition: true,
+    initLayout: true,
+});
+
 
 // Load entries
 getAllEntries.then(entries => {
     entries.forEach(entry => displayEntry(entry))
+    // msnry.layout()
 });
+
+
+
+const imgLoad=imagesLoaded(timeline, () => msnry.layout());
+imgLoad.on('done', () =>  msnry.layout())  
 
 
 // Listen for journal entry button clicks
@@ -173,6 +194,17 @@ function displayEntry(entry) {
     entryDiv.appendChild(entryComments);
 
     timeline.prepend(entryDiv);
+    
+    imgLoad.on('done', () => {
+        msnry.prepended(entryDiv);
+        msnry.layout();
+    })
+    
+
+    
+
+    
+
 }
 
 // HELPERS
