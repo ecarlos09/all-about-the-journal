@@ -2,14 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="styles/style.css">
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
-
 
     <script defer src="bundle.js"></script>
 
@@ -20,10 +18,8 @@
     <header>
         <h1>Consoul.log</h1>
     </header>
-<audio src="./assets/photoSnap.mp3" id="audio"></audio>
-<!-- <button type="button" class="play-sound-btn">Play Sound</button> -->
-    <main class="container">
 
+    <main class="container">
         <div id="form-container">
             <form id="journal-entry">
                 <textarea name="journal-entry" form="journal-entry" cols="30" rows="10"
@@ -35,8 +31,10 @@
                     <input id="gif-btn" type="button" value="GIF">
                     <input id="post-btn" type="submit" value="Post">
                 </div>
-          </form>
-       
+            </form>
+        
+
+        <!-- unable to nest form in a form -->
             <form id="gif-form">
                 <div id ="previewGifSection"></div>
                 <label for="giphy-search">Search for a Giphy</label>
@@ -46,7 +44,8 @@
                     <input id="addGiphy" type="button" value="Add">
                 </div>
             </form>
-          </div>
+
+        </div>
 
         <div id="timeline-sort">
             <label for="sort-dropdown"></label>
@@ -67,14 +66,6 @@
         </div>
     </main>
 
-
-<div id="secondHalf">
-        <section id="journal-timeline">
-        </section>
-</div>    
-</main>
 </body>
-
-<script src="./script/audio.js"></script>
 
 </html>
