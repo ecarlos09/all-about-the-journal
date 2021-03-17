@@ -2,6 +2,16 @@
 const hostURL = "http://localhost:3000/" 
 const giphy = require('./giphy')
 const fetchers = require('./fetchers');
+const audio = require('./audio');
+
+const sound = new Audio();        
+sound.src = "../assets/photoSnap.mp3";  // set the resource location 
+sound.oncanplaythrough = function(){   // When the sound has completely loaded
+    sound.readyToRock = true;    // flag sound is ready to play                                
+};
+sound.onerror = function(){      
+    console.log("Sound file SoundFileURL.mp3 failed to load.")
+};
 
 // Create fetchers
 const getAllEntries = fetchers.get("entries/");
@@ -42,6 +52,16 @@ postBtn.addEventListener('click', (e) => {
     const data = {message: message, gif: gif};
     createEntry(data).then(entry => displayEntry(entry));
 })
+
+//Sound effect for post button
+postBtn.addEventListener('click', playSound)
+
+function playSound(){
+    if(sound && sound.readyToRock){  
+        sound.currentTime = 0;       
+        sound.play();                
+    }
+}
 
 // Load entries
 getAllEntries.then(entries => {

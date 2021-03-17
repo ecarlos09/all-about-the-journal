@@ -43,7 +43,6 @@ h1 {
 
 form {
     
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -90,7 +89,6 @@ input[type="button"], input[type="submit"] {
     margin: auto; 
     background-color:grey;
     text-align: center;
-    display:none;
     padding:10px; 
 }
 
