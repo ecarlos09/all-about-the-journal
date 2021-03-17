@@ -9,6 +9,8 @@ const getEntryByID = (id) => fetchers.get(`entries/${id}`);
 const addComment = (id, data) => fetchers.add(id, data, 'comments');
 const addReact = (id, data) => fetchers.add(id, data, 'reacts');
 const createEntry = (message) => fetchers.create(message);
+    //search fetcher
+const getAllSearchResults = (keyword) => fetchers.get(`searches/${keyword}`);
 
 
 // HTML Elements
@@ -16,6 +18,10 @@ const timeline = document.getElementById('journal-timeline');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
 const formContainer = document.getElementById('form-container')
+    //search bar elements
+const searchBar = document.getElementById('search-bar');
+const search = document.getElementById('search');
+const searchBtn = document.getElementById('search-btn');
 
 // GIPHY Elements
 const addGiphyButton = document.getElementById('addGiphy')
@@ -33,10 +39,8 @@ gifBtn.addEventListener('click', giphy.showGiphyForm)
 gifForm.addEventListener('submit', giphy.searchGiphy)
 addGiphyButton.addEventListener('click', giphy.addGiphy)
 
-
 // Post button
 postBtn.addEventListener('click', (e) => {
-    e.preventDefault();
     const date = Date.now();
     const message = entryForm['journal-entry'].value;
     const gif = gifImage.src;
@@ -97,6 +101,20 @@ timeline.addEventListener('keyup', (e) => {
     }
 })
 
+    //Search listeners
+// searchBar.addEventListener('mouseover', ()=>{});
+// search.addEventListener('submit', ()=>{});
+searchBtn.addEventListener('click', beginSearch);
+
+    //Begin search
+function beginSearch(e) {
+    e.preventDefault();
+    console.log("Search is underway!");
+    const searchWord = search.value;
+    getAllSearchResults(searchWord).then(entries => {
+        entries.forEach(entry => displayEntry(entry))
+    });
+}
 
 function displayEntry(entry) {
     const id = entry.id;
