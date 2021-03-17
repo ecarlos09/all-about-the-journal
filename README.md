@@ -13,9 +13,3 @@ But what is ... ?
 
 Read on, our valuable visitor, and you will find the source of truth in this document that hopefully will help you to use our journal effectively! Withous further ado, let's see us getting started.
 
-
-
-
-
-
-

@@ -10,6 +10,8 @@ const getEntryByID = (id) => fetchers.get(`entries/${id}`);
 const addComment = (id, data) => fetchers.add(id, data, 'comments');
 const addReact = (id, data) => fetchers.add(id, data, 'reacts');
 const createEntry = (message) => fetchers.create(message);
+    //search fetcher
+const getAllSearchResults = (keyword) => fetchers.get(`searches/${keyword}`);
 
 
 // HTML Elements
@@ -17,7 +19,12 @@ const timeline = document.getElementById('journal-timeline');
 const sortBtn = document.getElementById('sort-dropdown');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
-const formContainer = document.getElementById('form-container');
+
+const formContainer = document.getElementById('form-container')
+    //search bar elements
+const searchBar = document.getElementById('search-bar');
+const search = document.getElementById('search');
+const searchBtn = document.getElementById('search-btn');
 
 // GIPHY Elements
 const addGiphyButton = document.getElementById('addGiphy');
@@ -33,7 +40,6 @@ addGiphyButton.addEventListener('click', giphy.addGiphy)
 
 // Post button
 postBtn.addEventListener('click', (e) => {
-    e.preventDefault();
     const date = Date.now();
     const message = entryForm['journal-entry'].value;
 
@@ -124,6 +130,29 @@ timeline.addEventListener('keyup', (e) => {
     }
 })
 
+    //Search listeners
+// searchBar.addEventListener('mouseover', ()=>{});
+// search.addEventListener('submit', ()=>{});
+searchBtn.addEventListener('click', beginSearch);
+
+    //Begin search
+function beginSearch(e) {
+    e.preventDefault();
+    console.log("Search is underway!");
+    clearTimeline();
+    console.log("Timeline cleared!");
+    const searchWord = search.value;
+    getAllSearchResults(searchWord).then(entries => {
+            let numSearches = entries.length;
+            const location = "search-message";
+            let matches = "matches";
+            if(numSearches===1) {matches="match"};
+            let resultMessage = `Your search has returned ${numSearches} ${matches}.  Showing successful matches only.`
+            createMessage(resultMessage, location);
+            entries.forEach(entry => displayEntry(entry));
+        }).catch(err => console.warn('OH NO, something went wrong!', err));
+    console.log("Search completed.  Showing matching entries only.");
+}
 
 function displayEntry(entry) {
     const id = entry.id;
@@ -235,6 +264,13 @@ function loadComment(comment){
 function clearTimeline() {
     timeline.innerHTML= "";
 }
+
+function createMessage(content, locationID) {
+    const messageLocation = document.getElementById(locationID);
+    const showMessage = messageLocation.innerText = content;
+}
+
+
 
 
 
