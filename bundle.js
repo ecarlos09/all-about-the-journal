@@ -111,7 +111,7 @@ function searchGiphy(event){
         fetch(url)
         .then(response => response.json())
         .then (content => {
-            let image = document.createElement('img')
+            // let image = document.createElement('img')
             gifImage.src = content.data[0].images.fixed_width.url;
 
         gifImage.style.display = "block";
@@ -170,8 +170,15 @@ postBtn.addEventListener('click', (e) => {
     const data = {message: message, gif: gif};
     createEntry(data).then(entry => displayEntry(entry));
     entryForm.reset()
-    gifImage.style.display = "none"
+    gifImage.src = "";
+    
+
     })
+
+
+   
+
+
 
 // Load entries
 getAllEntries.then(entries => {

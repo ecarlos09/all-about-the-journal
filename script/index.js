@@ -42,8 +42,15 @@ postBtn.addEventListener('click', (e) => {
     const data = {message: message, gif: gif};
     createEntry(data).then(entry => displayEntry(entry));
     entryForm.reset()
-    gifImage.style.display = "none"
+    gifImage.src = "";
+    
+
     })
+
+
+   
+
+
 
 // Load entries
 getAllEntries.then(entries => {

@@ -58,7 +58,7 @@ function searchGiphy(event){
         fetch(url)
         .then(response => response.json())
         .then (content => {
-            let image = document.createElement('img')
+            // let image = document.createElement('img')
             gifImage.src = content.data[0].images.fixed_width.url;
 
         gifImage.style.display = "block";
