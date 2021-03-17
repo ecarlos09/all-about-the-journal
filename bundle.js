@@ -159,9 +159,10 @@ addGiphyButton.addEventListener('click', giphy.addGiphy)
 // Post button
 postBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    const date = new Date();
     const message = entryForm['journal-entry'].value;
     const gif = gifImage.src;
-    const data = {message: message, gif: gif};
+    const data = {message: message, gif: gif, date: date};
     createEntry(data).then(entry => displayEntry(entry));
 })
 
