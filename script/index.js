@@ -120,8 +120,13 @@ timeline.addEventListener('keyup', (e) => {
             commentInput.value = "";
 
             addComment(id, commentObj).then(comments => {
-                commentsBox.textContent = "";
-                commentsBox.prepend(loadComment(comments[comments.length -1]));
+                if (commentsBox.textContent === "No comments!") {
+                    commentsBox.textContent = "";
+                }
+                else {
+                    commentsBox.prepend(loadComment(comments[comments.length -1]));
+                }
+                
             });
         }
 
