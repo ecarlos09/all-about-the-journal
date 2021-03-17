@@ -1,4 +1,12 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const soundBtn = document.querySelector('#post-btn');
+let myAudio = document.querySelector('#audio');
+soundBtn.addEventListener('click', ()=>{
+    myAudio.play();
+});
+
+
+},{}],2:[function(require,module,exports){
 
 const hostURL = "http://localhost:3000/" 
 
@@ -51,7 +59,7 @@ async function add(id, data, route) {
 module.exports = {get, add, create};
 
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 
 
 //GIPHY
@@ -142,7 +150,9 @@ module.exports = {showGiphyForm,searchGiphy,addGiphy, clearGiphy}
 const hostURL = "http://localhost:3000/" 
 const giphy = require('./giphy')
 const fetchers = require('./fetchers');
+
 const sort = require('./sorters');
+
 
 // Create fetchers
 const getAllEntries = fetchers.get("entries/");
@@ -195,6 +205,16 @@ postBtn.addEventListener('click', (e) => {
     entryForm.reset()
     giphy.clearGiphy();
 })
+
+//Sound effect for post button
+postBtn.addEventListener('click', playSound)
+
+function playSound(){
+    if(sound && sound.readyToRock){  
+        sound.currentTime = 0;       
+        sound.play();                
+    }
+}
 
 // Load entries
 getAllEntries.then(entries => {
@@ -390,23 +410,6 @@ function clearTimeline() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 },{"./fetchers":1,"./giphy":2,"./sorters":4}],4:[function(require,module,exports){
 function byRecent(entries) {
     entries.sort((a,b) => {
@@ -441,3 +444,4 @@ module.exports = {byRecent, byOldest, byReacts, byComments}
 
 
 },{}]},{},[3]);
+
