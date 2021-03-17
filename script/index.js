@@ -10,7 +10,7 @@ const getEntryByID = (id) => fetchers.get(`entries/${id}`);
 const addComment = (id, data) => fetchers.add(id, data, 'comments');
 const addReact = (id, data) => fetchers.add(id, data, 'reacts');
 const createEntry = (message) => fetchers.create(message);
-    //search fetcher
+//search fetcher
 const getAllSearchResults = (keyword) => fetchers.get(`searches/${keyword}`);
 
 
@@ -21,7 +21,7 @@ const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
 
 const formContainer = document.getElementById('form-container')
-    //search bar elements
+//search bar elements
 const searchBar = document.getElementById('search-bar');
 const search = document.getElementById('search');
 const searchBtn = document.getElementById('search-btn');
@@ -40,12 +40,12 @@ addGiphyButton.addEventListener('click', giphy.addGiphy)
 
 // Post button
 postBtn.addEventListener('click', (e) => {
-    const date = Date.now();
+    e.preventDefault();
+    const date = new Date();;
     const message = entryForm['journal-entry'].value;
-
     const gif = selectedGif.firstChild;
     const gifURL = gif ? gif.src : null;
-    const data = {message: message, gif: gifURL};
+    const data = {message: message, gif: gifURL, date: date};
 
     createEntry(data).then(entry => displayEntry(entry));
     entryForm.reset()
