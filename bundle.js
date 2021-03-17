@@ -142,6 +142,7 @@ module.exports = {showGiphyForm,searchGiphy,addGiphy, clearGiphy}
 const hostURL = "http://localhost:3000/" 
 const giphy = require('./giphy')
 const fetchers = require('./fetchers');
+const sort = require('./sorters');
 
 // Create fetchers
 const getAllEntries = fetchers.get("entries/");
@@ -153,6 +154,7 @@ const createEntry = (message) => fetchers.create(message);
 
 // HTML Elements
 const timeline = document.getElementById('journal-timeline');
+const sortBtn = document.getElementById('sort-dropdown');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
 const formContainer = document.getElementById('form-container')
@@ -168,7 +170,6 @@ const APIkey = "aWqPT5uBm54EQ5x9ooFj4TpWjXxF0mNh";
 
 
 //GIPHY
-
 gifBtn.addEventListener('click', giphy.showGiphyForm)
 gifForm.addEventListener('submit', giphy.searchGiphy)
 addGiphyButton.addEventListener('click', giphy.addGiphy)
@@ -199,6 +200,32 @@ postBtn.addEventListener('click', (e) => {
 getAllEntries.then(entries => {
     entries.forEach(entry => displayEntry(entry))
 });
+
+// Sort entries
+sortBtn.addEventListener('change', (e) => {
+    clearTimeline();
+
+    getAllEntries.then(entries => {
+        switch (e.target.value) {
+            case 'recent':
+                entries = sort.byRecent(entries);
+                break;
+            case 'oldest':
+                entries = sort.byOldest(entries);
+                break;
+            case 'reacts':
+                entries = sort.byReacts(entries);
+                break;
+            case 'comments':
+                entries = sort.byComments(entries);
+                break;
+            default:
+                break;
+        }
+        
+        entries.forEach(entry => displayEntry(entry))
+    });
+})
 
 
 // Listen for journal entry button clicks
@@ -358,6 +385,9 @@ function loadComment(comment){
     return commentElement;   
 }
 
+function clearTimeline() {
+    timeline.innerHTML= "";
+}
 
 
 
@@ -377,4 +407,37 @@ function loadComment(comment){
 
 
 
-},{"./fetchers":1,"./giphy":2}]},{},[3]);
+},{"./fetchers":1,"./giphy":2,"./sorters":4}],4:[function(require,module,exports){
+function byRecent(entries) {
+    entries.sort((a,b) => {
+        return (new Date(a.date) - new Date(b.date))
+    });
+    return entries;
+}
+
+function byOldest(entries) {
+    entries.sort((a,b) => {
+        return -(new Date(a.date) - new Date(b.date))
+    });
+    return entries;
+}
+
+function byReacts(entries) {
+    entries.sort((a,b) => {
+        const adder = (sum, next) => sum + next;
+        return a.reacts.reduce(adder) - b.reacts.reduce(adder);
+    });
+    return entries;
+}
+
+function byComments(entries) {
+    entries.sort((a,b) => {
+        return a.comments.length - b.comments.length;
+    });
+    return entries;
+}
+
+module.exports = {byRecent, byOldest, byReacts, byComments}
+
+
+},{}]},{},[3]);

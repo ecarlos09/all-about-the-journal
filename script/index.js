@@ -2,6 +2,7 @@
 const hostURL = "http://localhost:3000/";
 const giphy = require('./giphy');
 const fetchers = require('./fetchers');
+const sort = require('./sorters');
 
 // Create fetchers
 const getAllEntries = fetchers.get("entries/");
@@ -13,6 +14,7 @@ const createEntry = (message) => fetchers.create(message);
 
 // HTML Elements
 const timeline = document.getElementById('journal-timeline');
+const sortBtn = document.getElementById('sort-dropdown');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
 const formContainer = document.getElementById('form-container');
@@ -25,11 +27,9 @@ const gifForm = document.getElementById('gif-form');
 
 
 //GIPHY
-
-gifBtn.addEventListener('click', giphy.showGiphyForm);
-gifForm.addEventListener('submit', giphy.searchGiphy);
-addGiphyButton.addEventListener('click', giphy.addGiphy);
-
+gifBtn.addEventListener('click', giphy.showGiphyForm)
+gifForm.addEventListener('submit', giphy.searchGiphy)
+addGiphyButton.addEventListener('click', giphy.addGiphy)
 
 // Post button
 postBtn.addEventListener('click', (e) => {
@@ -50,6 +50,32 @@ postBtn.addEventListener('click', (e) => {
 getAllEntries.then(entries => {
     entries.forEach(entry => displayEntry(entry))
 });
+
+// Sort entries
+sortBtn.addEventListener('change', (e) => {
+    clearTimeline();
+
+    getAllEntries.then(entries => {
+        switch (e.target.value) {
+            case 'recent':
+                entries = sort.byRecent(entries);
+                break;
+            case 'oldest':
+                entries = sort.byOldest(entries);
+                break;
+            case 'reacts':
+                entries = sort.byReacts(entries);
+                break;
+            case 'comments':
+                entries = sort.byComments(entries);
+                break;
+            default:
+                break;
+        }
+        
+        entries.forEach(entry => displayEntry(entry))
+    });
+})
 
 
 // Listen for journal entry button clicks
@@ -206,6 +232,9 @@ function loadComment(comment){
     return commentElement;   
 }
 
+function clearTimeline() {
+    timeline.innerHTML= "";
+}
 
 
 
