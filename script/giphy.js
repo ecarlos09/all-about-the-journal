@@ -71,11 +71,4 @@ function searchGiphy(event){
     }
 
 
-
-
-function removeGiphy(){
-
-
-}
-
 module.exports = {showGiphyForm,searchGiphy,addGiphy}
