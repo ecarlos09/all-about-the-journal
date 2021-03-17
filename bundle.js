@@ -1,4 +1,12 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+const soundBtn = document.querySelector('#post-btn');
+let myAudio = document.querySelector('#audio');
+soundBtn.addEventListener('click', ()=>{
+    myAudio.play();
+});
+
+
+},{}],2:[function(require,module,exports){
 
 const hostURL = "http://localhost:3000/" 
 
@@ -51,7 +59,7 @@ async function add(id, data, route) {
 module.exports = {get, add, create};
 
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 
 
 //GIPHY
@@ -120,11 +128,12 @@ function searchGiphy(event){
 
 
 module.exports = {showGiphyForm,searchGiphy,addGiphy}
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 
 const hostURL = "http://localhost:3000/" 
 const giphy = require('./giphy')
 const fetchers = require('./fetchers');
+const audio = require('./audio');
 
 const sound = new Audio();        
 sound.src = "../assets/photoSnap.mp3";  // set the resource location 
@@ -366,4 +375,4 @@ function loadComment(comment){
 
 
 
-},{"./fetchers":1,"./giphy":2}]},{},[3]);
+},{"./audio":1,"./fetchers":2,"./giphy":3}]},{},[4]);
