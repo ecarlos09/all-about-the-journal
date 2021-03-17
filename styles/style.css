@@ -186,9 +186,9 @@ input[type="button"], input[type="submit"] {
 }
 
 button {
-    width: 25px;
-    height: 25px;
-    background: rgb(61, 61, 61);
+    width: 30px;
+    height: 30px;
+    background: white;
     border-radius: 100%;
 	color: inherit;
 	border: none;
@@ -198,7 +198,30 @@ button {
 	cursor: pointer;
 	outline: none;
     text-align: center;
+    margin: 5px;
 }
+
+.reactBtn1{
+    background-image: url('../assets/smile.png');
+   background-size:cover;
+   
+
+}
+
+.reactBtn2{
+    background-image: url('../assets/laugh.png');
+   background-size:cover;
+   
+
+}
+
+.reactBtn3{
+    background-image: url('../assets/virusEmoji.png');
+   background-size:cover;
+   
+
+}
+
 
 /* ANIMATIONS */
 
