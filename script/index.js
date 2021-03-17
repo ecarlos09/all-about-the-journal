@@ -1,7 +1,8 @@
 
-const hostURL = "http://localhost:3000/" 
-const giphy = require('./giphy')
+const hostURL = "http://localhost:3000/";
+const giphy = require('./giphy');
 const fetchers = require('./fetchers');
+const sort = require('./sorters');
 
 // Create fetchers
 const getAllEntries = fetchers.get("entries/");
@@ -15,8 +16,10 @@ const getAllSearchResults = (keyword) => fetchers.get(`searches/${keyword}`);
 
 // HTML Elements
 const timeline = document.getElementById('journal-timeline');
+const sortBtn = document.getElementById('sort-dropdown');
 const entryForm = document.getElementById("journal-entry");
 const postBtn = document.getElementById('post-btn');
+
 const formContainer = document.getElementById('form-container')
     //search bar elements
 const searchBar = document.getElementById('search-bar');
@@ -24,17 +27,13 @@ const search = document.getElementById('search');
 const searchBtn = document.getElementById('search-btn');
 
 // GIPHY Elements
-const addGiphyButton = document.getElementById('addGiphy')
-const gifImage = document.getElementById('gifImage')
-const gifBtn = document.getElementById('gif-btn')
-const gifPreviewBtn = document.getElementById('gifPreviewBtn')
-const previewGifSection = document.getElementById('previewGifSection')
-const gifForm = document.getElementById('gif-form')
-const APIkey = "aWqPT5uBm54EQ5x9ooFj4TpWjXxF0mNh";
+const addGiphyButton = document.getElementById('addGiphy');
+const selectedGif = document.getElementById('selected-gif');
+const gifBtn = document.getElementById('gif-btn');
+const gifForm = document.getElementById('gif-form');
 
 
 //GIPHY
-
 gifBtn.addEventListener('click', giphy.showGiphyForm)
 gifForm.addEventListener('submit', giphy.searchGiphy)
 addGiphyButton.addEventListener('click', giphy.addGiphy)
@@ -43,16 +42,46 @@ addGiphyButton.addEventListener('click', giphy.addGiphy)
 postBtn.addEventListener('click', (e) => {
     const date = Date.now();
     const message = entryForm['journal-entry'].value;
-    const gif = gifImage.src;
-    const data = {message: message, gif: gif, date: date};
-    
+
+    const gif = selectedGif.firstChild;
+    const gifURL = gif ? gif.src : null;
+    const data = {message: message, gif: gifURL};
+
     createEntry(data).then(entry => displayEntry(entry));
+    entryForm.reset()
+    giphy.clearGiphy();
 })
 
 // Load entries
 getAllEntries.then(entries => {
     entries.forEach(entry => displayEntry(entry))
 });
+
+// Sort entries
+sortBtn.addEventListener('change', (e) => {
+    clearTimeline();
+
+    getAllEntries.then(entries => {
+        switch (e.target.value) {
+            case 'recent':
+                entries = sort.byRecent(entries);
+                break;
+            case 'oldest':
+                entries = sort.byOldest(entries);
+                break;
+            case 'reacts':
+                entries = sort.byReacts(entries);
+                break;
+            case 'comments':
+                entries = sort.byComments(entries);
+                break;
+            default:
+                break;
+        }
+        
+        entries.forEach(entry => displayEntry(entry))
+    });
+})
 
 
 // Listen for journal entry button clicks
@@ -129,10 +158,10 @@ function displayEntry(entry) {
     const id = entry.id;
     const date = new Date(entry.date);
     const message = entry.message;
-    const gifURL = entry.gif || null;
+    const gifURL = entry.gif;
     const comments = entry.comments;
     const reacts = entry.reacts;
-    
+
     const entryDiv = document.createElement("div");
     const entryDate = document.createElement("div");
     const entryMessage = document.createElement("div");
@@ -164,14 +193,6 @@ function displayEntry(entry) {
 
     // MESSAGE
     entryMessage.textContent = message;
-
-    // GIF
-    if(gifURL){
-        const gif = document.createElement('img');
-        gif.src = gifURL;
-        entryGif.appendChild(gif);
-    }
-    
 
     // COMMENTS 
     const commentBtn = document.createElement("button");
@@ -208,7 +229,15 @@ function displayEntry(entry) {
 
     entryDiv.appendChild(entryDate);
     entryDiv.appendChild(entryMessage);
-    entryDiv.appendChild(entryGif);
+
+    // GIF
+    if(gifURL){
+        const gif = document.createElement('img');
+        gif.src = gifURL;
+        entryGif.appendChild(gif);
+        entryDiv.appendChild(entryGif);
+    }
+   
     entryDiv.appendChild(entryInteraction);
     entryDiv.appendChild(entryComments);
 
@@ -240,6 +269,7 @@ function createMessage(content, locationID) {
     const messageLocation = document.getElementById(locationID);
     const showMessage = messageLocation.innerText = content;
 }
+
 
 
 
