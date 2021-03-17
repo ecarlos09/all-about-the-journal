@@ -233,10 +233,13 @@ searchBtn.addEventListener('click', beginSearch);
 function beginSearch(e) {
     e.preventDefault();
     console.log("Search is underway!");
+    clearTimeline();
+    console.log("Timeline cleared!");
     const searchWord = search.value;
     getAllSearchResults(searchWord).then(entries => {
         entries.forEach(entry => displayEntry(entry))
     });
+    console.log("Search completed.  Showing matching entries only.");
 }
 
 function displayEntry(entry) {
@@ -344,6 +347,10 @@ function loadComment(comment){
     commentElement.className = "comment";
     commentElement.textContent = comment;
     return commentElement;   
+}
+
+function clearTimeline() {
+    timeline.innerHTML= "";
 }
 
 
