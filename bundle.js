@@ -57,6 +57,7 @@ module.exports = {get, add, create};
 
 // GIPHY Elements
 const addGiphyButton = document.getElementById('addGiphy')
+const selectedGif = document.getElementById('selected-gif')
 const gifImage = document.getElementById('gifImage')
 const gifBtn = document.getElementById('gif-btn')
 const gifPreviewBtn = document.getElementById('gifPreviewBtn')
@@ -111,20 +112,30 @@ function searchGiphy(event){
         fetch(url)
         .then(response => response.json())
         .then (content => {
-            // let image = document.createElement('img')
-            gifImage.src = content.data[0].images.fixed_width.url;
+            const gif = document.createElement('img')
+            gif.src = content.data[0].images.fixed_width.url;
+            gif.style.display = "block";
+            console.log(selectedGif);
+            selectedGif.appendChild(gif);
+            showGiphyForm();
+            gifForm.reset()
 
-        gifImage.style.display = "block";
-        gifForm.style.display = "none"
-        entryForm.style.width = "100%";
-        gifForm.reset()
-        previewimage.src = "" 
-
+            // gifImage.src = content.data[0].images.fixed_width.url;
+            // // console.log(gifImage.src);
+            // gifImage.style.display = "block";
+            // gifForm.style.display = "none"
+            // entryForm.style.width = "100%";
+            
+            // previewimage.src = "" 
         })
     }
 
+function clearGiphy(){
+    selectedGif.innerHTML = '';
+}
 
-module.exports = {showGiphyForm,searchGiphy,addGiphy}
+
+module.exports = {showGiphyForm,searchGiphy,addGiphy, clearGiphy}
 },{}],3:[function(require,module,exports){
 
 const hostURL = "http://localhost:3000/" 
@@ -147,7 +158,7 @@ const formContainer = document.getElementById('form-container')
 
 // GIPHY Elements
 const addGiphyButton = document.getElementById('addGiphy')
-const gifImage = document.getElementById('gifImage')
+const selectedGif = document.getElementById('selected-gif')
 const gifBtn = document.getElementById('gif-btn')
 const gifPreviewBtn = document.getElementById('gifPreviewBtn')
 const previewGifSection = document.getElementById('previewGifSection')
@@ -166,19 +177,16 @@ addGiphyButton.addEventListener('click', giphy.addGiphy)
 postBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const message = entryForm['journal-entry'].value;
-    const gif = gifImage.src;
-    const data = {message: message, gif: gif};
+
+    const gif = selectedGif.firstChild;
+    const gifURL = gif ? gif.src : null;
+    console.log( selectedGif.firstChild);
+    const data = {message: message, gif: gifURL};
+    
     createEntry(data).then(entry => displayEntry(entry));
     entryForm.reset()
-    gifImage.src = "";
-    
-
-    })
-
-
-   
-
-
+    giphy.clearGiphy();
+})
 
 // Load entries
 getAllEntries.then(entries => {
@@ -236,10 +244,9 @@ timeline.addEventListener('keyup', (e) => {
 function displayEntry(entry) {
     const id = entry.id;
     const message = entry.message;
-    const gifURL = entry.gif || null;
+    const gifURL = entry.gif;
     const comments = entry.comments;
     const reacts = entry.reacts;
-    
 
     const entryDiv = document.createElement("div");
     const entryMessage = document.createElement("div");
@@ -259,12 +266,7 @@ function displayEntry(entry) {
     // MESSAGE
     entryMessage.textContent = message;
 
-    // GIF
-    if(gifURL){
-        const gif = document.createElement('img');
-        gif.src = gifURL;
-        entryGif.appendChild(gif);
-    }
+    
     
 
     // COMMENTS 
@@ -301,7 +303,15 @@ function displayEntry(entry) {
     entryInteraction.appendChild(entryReacts);
 
     entryDiv.appendChild(entryMessage);
-    entryDiv.appendChild(entryGif);
+
+    // GIF
+    if(gifURL){
+        const gif = document.createElement('img');
+        gif.src = gifURL;
+        entryGif.appendChild(gif);
+        entryDiv.appendChild(entryGif);
+    }
+   
     entryDiv.appendChild(entryInteraction);
     entryDiv.appendChild(entryComments);
 
