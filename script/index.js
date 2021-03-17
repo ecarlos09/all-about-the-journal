@@ -37,9 +37,11 @@ addGiphyButton.addEventListener('click', giphy.addGiphy)
 // Post button
 postBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    const date = Date.now();
     const message = entryForm['journal-entry'].value;
     const gif = gifImage.src;
-    const data = {message: message, gif: gif};
+    const data = {message: message, gif: gif, date: date};
+    
     createEntry(data).then(entry => displayEntry(entry));
 })
 
@@ -120,7 +122,6 @@ function displayEntry(entry) {
     entryInteraction.className = "interaction-box"
     entryComments.className = "comments-box";
     entryReacts.className = "react-btns";
-
     
     // DATE
     const timeString = `${date.getHours() % 12 || 12}:${date.getMinutes().toString().padStart(2,'0')}`
@@ -133,7 +134,7 @@ function displayEntry(entry) {
     dateDiv.textContent = dateString;
     entryDate.appendChild(timeDiv);
     entryDate.appendChild(dateDiv);
-    
+
     // MESSAGE
     entryMessage.textContent = message;
 

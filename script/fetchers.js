@@ -9,6 +9,7 @@ async function get(route) {
 
 async function create(data) {
     const body = {
+        "date": data.date,
         "message": data.message,
         "gif": data.gif,
     };
