@@ -127,6 +127,16 @@ input[type="button"], input[type="submit"] {
      } 
 
 
+.entry-date {
+    /* position: absolute; */
+    float: right;
+    padding: 1em;
+}
+
+.entry-box .time-text {
+    margin-right: 1em;
+}
+
 .message-box {
     background-color: rgb(199, 199, 199);
     padding: 2em;
