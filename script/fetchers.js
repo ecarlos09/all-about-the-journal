@@ -24,7 +24,7 @@ async function create(data) {
         },
         body: JSON.stringify(body)
     }
-    console.log(options.body);
+
     let response = await fetch(hostURL + postRoute, options)
     response = await response.json();
     return response;

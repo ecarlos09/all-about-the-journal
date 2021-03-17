@@ -25,7 +25,7 @@ async function create(data) {
         },
         body: JSON.stringify(body)
     }
-    console.log(options.body);
+
     let response = await fetch(hostURL + postRoute, options)
     response = await response.json();
     return response;
@@ -101,7 +101,6 @@ function addGiphy(event) {
             const gif = document.createElement('img')
             gif.src = content.data[0].images.fixed_width.url;
             gif.style.display = "block";
-            console.log(selectedGif);
             selectedGif.appendChild(gif);
             showGiphyForm();
             gifForm.reset();
