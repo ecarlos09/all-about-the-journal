@@ -114,8 +114,14 @@ function beginSearch(e) {
     console.log("Timeline cleared!");
     const searchWord = search.value;
     getAllSearchResults(searchWord).then(entries => {
-        entries.forEach(entry => displayEntry(entry))
-    });
+            let numSearches = entries.length;
+            const location = "search-message";
+            let matches = "matches";
+            if(numSearches===1) {matches="match"};
+            let resultMessage = `Your search has returned ${numSearches} ${matches}.  Showing successful matches only.`
+            createMessage(resultMessage, location);
+            entries.forEach(entry => displayEntry(entry));
+        }).catch(err => console.warn('OH NO, something went wrong!', err));
     console.log("Search completed.  Showing matching entries only.");
 }
 
@@ -228,6 +234,11 @@ function loadComment(comment){
 
 function clearTimeline() {
     timeline.innerHTML= "";
+}
+
+function createMessage(content, locationID) {
+    const messageLocation = document.getElementById(locationID);
+    const showMessage = messageLocation.innerText = content;
 }
 
 
