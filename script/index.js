@@ -2,9 +2,7 @@
 const hostURL = "http://localhost:3000/";
 const giphy = require('./giphy');
 const fetchers = require('./fetchers');
-
 const sort = require('./sorters');
-
 
 // Create fetchers
 const getAllEntries = fetchers.get("entries/");
@@ -47,7 +45,6 @@ postBtn.addEventListener('click', (e) => {
     entryForm.reset()
     giphy.clearGiphy();
 })
-
 
 // Load entries
 getAllEntries.then(entries => {
