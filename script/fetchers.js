@@ -11,7 +11,6 @@ async function create(data) {
     const body = {
         "message": data.message,
         "gif": data.gif,
-        "data": data.date
     };
 
     const postRoute = "entries/";
