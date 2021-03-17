@@ -1,8 +1,6 @@
 /* FONTS */
 
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
-
-
 * {
     box-sizing: border-box;
     padding: 0;
@@ -34,19 +32,17 @@ h1 {
 
 /* FORM */
 
-#form-container{
+#form-container {
     border: 3px solid black;
     width: 60%;
     margin: auto;
 }
 
 form {
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
 #form-buttons {
@@ -55,7 +51,6 @@ form {
     justify-content: flex-end;
     width: 100%;
     position: relative;
-   
     right: 5px
 }
 
@@ -63,7 +58,6 @@ textarea {
     width: 100%;
     border: none;
     resize: none;
-    
     height: 15vh;
     font-size: 1em;
     padding: 10px;
@@ -76,50 +70,45 @@ input[type="button"], input[type="submit"] {
     font-size: 1em;
 }
 
-#gif-form{
-
-    background-color:grey;
+#gif-form {
+    background-color: grey;
     text-align: center;
-    display:none;
-    padding:10px;
-    
+    display: none;
+    padding: 10px;
 }
 
-#gifImage{
-    display:none;
+#gifImage {
+    display: none;
 }
 
-#gif-form-btns{
+#gif-form-btns {
     display: flex;
     margin: 10px;
 }
 
-#close-gif-section{
+#close-gif-section {
     position: relative;
-    bottom:30px;
-    left:75px;
+    bottom: 30px;
+    left: 75px;
 }
 
-/* TIMELINE */ 
- #journal-timeline {
+/* TIMELINE */
+
+#journal-timeline {
     display: inline-flex;
     flex-flow: row wrap;
     justify-content: center;
-    width:80%;
-    margin:auto;
-
+    width: 80%;
+    margin: auto;
     text-align: center;
-    padding:10px;
+    padding: 10px;
 }
-
-
-
 
 /* POSTS */
 
-#secondHalf{
-    display:flex;
-    width:100%;
+#secondHalf {
+    display: flex;
+    width: 100%;
     justify-content: center;
 }
 
@@ -130,8 +119,7 @@ input[type="button"], input[type="submit"] {
     margin-bottom: 2em;
     flex: 1 1 auto;
     max-width: 400px;
-    margin:20px;
-    
+    margin: 20px;
 }
 
 .entry-date {
@@ -152,12 +140,15 @@ input[type="button"], input[type="submit"] {
     border-radius: 10px;
 }
 
-.gif-box img{
+.gif-box img {
     width: 100%;
     height: auto;
     /* overflow: hidden; */
 }
 
+.comment-btn{
+    background:rgb(32, 32, 32);
+}
 .comments-box {
     background-color: rgb(68, 68, 68);
     color: white;
@@ -173,7 +164,6 @@ input[type="button"], input[type="submit"] {
     align-items: center;
 }
 
-
 .comment-input {
     flex-grow: 2;
     border: 2px solid rgb(32, 32, 32);
@@ -188,40 +178,32 @@ input[type="button"], input[type="submit"] {
 button {
     width: 30px;
     height: 30px;
-    background: white;
     border-radius: 100%;
-	color: inherit;
-	border: none;
-	padding: 1em;
+    color: inherit;
+    border: none;
+    padding: 1em;
     /* margin: 0.2em; */
-	font: inherit;
-	cursor: pointer;
-	outline: none;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
     text-align: center;
     margin: 5px;
 }
 
-.reactBtn1{
+.reactBtn1 {
     background-image: url('../assets/smile.png');
-   background-size:cover;
-   
-
+    background-size: cover;
 }
 
-.reactBtn2{
+.reactBtn2 {
     background-image: url('../assets/laugh.png');
-   background-size:cover;
-   
-
+    background-size: cover;
 }
 
-.reactBtn3{
+.reactBtn3 {
     background-image: url('../assets/virusEmoji.png');
-   background-size:cover;
-   
-
+    background-size: cover;
 }
-
 
 /* ANIMATIONS */
 
