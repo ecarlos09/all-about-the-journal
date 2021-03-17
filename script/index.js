@@ -125,8 +125,15 @@ function displayEntry(entry) {
     // DATE
     const timeString = `${date.getHours() % 12 || 12}:${date.getMinutes().toString().padStart(2,'0')}`
     const dateString = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
-    entryDate.textContent = timeString + " on " + dateString;
-
+    const timeDiv = document.createElement("span");
+    const dateDiv = document.createElement("span");
+    timeDiv.className = "time-text";
+    timeDiv.textContent = timeString;
+    dateDiv.className = "date-text";
+    dateDiv.textContent = dateString;
+    entryDate.appendChild(timeDiv);
+    entryDate.appendChild(dateDiv);
+    
     // MESSAGE
     entryMessage.textContent = message;
 
