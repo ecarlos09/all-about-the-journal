@@ -1,5 +1,5 @@
-“consoul.log”
-A place for tech nerds to reveal their innermost feelings ...
+**“consoul.log”
+*A place for tech nerds to reveal their innermost feelings ...
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/dafd330d-8703-4f6d-a426-d9a0682089eb/deploy-status)](https://app.netlify.com/sites/peaceful-hoover-3dc7e0/deploys)
 
@@ -12,6 +12,8 @@ May we welcome you to our humble website with a great mission in our minds! We a
 But what is ... ?
 
 Read on, our valuable visitor, and you will find the source of truth in this document that hopefully will help you to use our journal effectively! Withous further ado, let's see us getting started.
+
+
 
 
 
