@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" />
     <link rel="stylesheet" href="styles/style.css">
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+    <!-- <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script> -->
+    <script src="https://unpkg.com/packery@2/dist/packery.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
     <script defer src="./script/audio.js"></script>
     <script defer src="bundle.js"></script>
 
@@ -16,29 +21,29 @@
 
 <body>
     <header>
-        <h1>Consoul.log</h1>
+        <h1>Consoul.log</h1> <br>
+        <h3>community journaling for computer nerds</h3>
     </header>
     <audio src="./assets/audio/photoSnap.mp3" id="audio"></audio>
     <main class="container">
         <div id="form-container">
             <form id="journal-entry">
                 <textarea name="journal-entry" form="journal-entry" cols="30" rows="10"
-                    placeholder="Let us know your thoughts here...(max 300)" maxlength="300">
-                </textarea>
+                    placeholder="Let us know your thoughts here...(max 300)" minlength="1" maxlength="300"></textarea>
                 <div id="selected-gif"></div>
                 <!-- <img id="gifImage"> -->
-                <div id="form-buttons">       
-                    <input id="gif-btn" type="button" value="GIF">
-                    <input id="post-btn" type="submit" value="Post">
+                <div id="form-buttons">
+                    <input id="gif-btn" class="page-button" type="button" value="GIF">
+                    <input id="post-btn" class="page-button" type="submit" value="Post">
                 </div>
             </form>
-        
 
-        <!-- unable to nest form in a form -->
+
+            <!-- unable to nest form in a form -->
             <form id="gif-form">
-                <div id ="previewGifSection"></div>
-                <label for="giphy-search">Search for a Giphy</label>
-                <input type="search" id="giphy-search">
+                <div id="previewGifSection"></div>
+                <!-- <label for="giphy-search">Search for a Giphy</label> -->
+                <input type="search" id="giphy-search" placeholder="Search GIPHY">
                 <div id="gif-form-btns">
                     <input id="gifPreviewBtn" type="submit" value="Preview">
                     <input id="addGiphy" type="button" value="Add">
@@ -47,37 +52,44 @@
 
         </div>
 
-        <section id="search-bar">
-            <form>
-                <input type="text" id="search" placeholder="search entries by keyword ..."/>
+        <div id="timeline-viewing">
+            <form id="search-bar">
+                <input type="search" id="search" placeholder="search entries by keyword ..." />
                 <input type="submit" id="search-btn" value="search">
             </form>
 
-            <div id="search-message">
-
+            <div id="timeline-sort">
+                <label for="sort-dropdown"></label>
+                <select name="sort-dropdown" id="sort-dropdown">
+                    <option value="recent">Recent</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="reacts">Reacts</option>
+                    <option value="comments">Comments</option>
+                </select>
             </div>
-        </section>
-
-        <div id="timeline-sort">
-            <label for="sort-dropdown"></label>
-            <select name="sort-dropdown" id="sort-dropdown">
-                <option value="recent">Recent</option>
-                <option value="oldest">Oldest</option>
-                <option value="reacts">Reacts</option>
-                <option value="comments">Comments</option>
-            </select>
         </div>
 
-        <div id="secondHalf">
+        <div id="search-message"> </div>
 
-
-        <section id="journal-timeline">
-
-        </section>
         
-        </div>
+
+        <!-- <div id="secondHalf"> -->
+
+
+        <section id="journal-timeline" class ="grid">
+        
+        </section>
+
+        <!-- </div> -->
     </main>
 
+
+    <footer>
+        <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </footer>
 </body>
+
+
+
 
 </html>
