@@ -4,7 +4,7 @@
   "description": "A community journaling website",
   "main": "index.js",
   "scripts": {
-    "test": "jest -watchAll",
+    "test": "jest --watchAll",
     "action-test": "jest",
     "dev": "concurrently \"watchify ./script/index.js -o bundle.js\" \"python -m http.server\""
   },
