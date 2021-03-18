@@ -13,9 +13,11 @@ But what is ... ?
 
 Read on, our valuable visitor, and you will find truth in this document that hopefully will help you to use our journal effectively! Withous further ado, let's see us getting started.
 
+<styles>
 #Installation {
   font-size: 75;
 }
+</styles>
 
 <h1 id='Installation>Installation</h1>
         
