@@ -1,7 +1,7 @@
 //Import js file
 const sorters = require('../script/sorters')
 
-//Set up overall test suite for index.js functions
+//Set up overall test suite for sorters.js functions
 
     //Need to mock functions?
 
@@ -16,7 +16,7 @@ describe ('sorters', () => {
 
         test('test for ...', () => {
             //Edit as required
-            index.function();
+            sorters.function();
             expect(id.querySelectorAll('child-element')).toBe('desired result!');
         })
     })
