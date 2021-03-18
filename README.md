@@ -13,19 +13,19 @@ But what is ... ?
 
 Read on, our valuable visitor, and you will find truth in this document that hopefully will help you to use our journal effectively! Withous further ado, let's see us getting started.
 
-##Installation
+## Installation and using the website
  
- ###Using Netlify deployed link
+ ### Using Netlify deployed link
  <link></link>
  
- ###Without using the deployed website
+ ### Without using the deployed website
  1. Clone or download the repos to the same folder from theduckfliesagain/all-about-the-journal and the duckfliesagain/journal-server.
  2. Run npm install in both directories (this installs dependencies).
  3. cd into all-about-the-journal folder and start the server using npm run dev (starts server using watchify bundler).
  4. cd .. to go back and cd into journal-server folder. Here we need to start our server running npm start command.
  5. Cool! Now head to http://localhost:8000/! Happy journaling.
 
-##Technologies
+## Technologies
 
  1. Giphy API
  2. Express API framework
@@ -33,7 +33,7 @@ Read on, our valuable visitor, and you will find truth in this document that hop
  4. Jest testing 
  5. Packery (website layouts) 
 
-##Process
+## Process
 
 The team has followed linear design approach that is 1) we have gathered initially to discuss and brainstorm ideas:
                                                         -> brainstorming took place on Moqups online platform for collaborative website wireframing.
