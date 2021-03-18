@@ -35,14 +35,15 @@ Read on, our valuable visitor, and you will find truth in this document that hop
 
 ## Process
 
-The team has followed linear design approach that is 1) we have gathered initially to discuss and brainstorm ideas:
-                                                        -> brainstorming took place on Moqups online platform for collaborative website wireframing.
-                                                     2) we have agreed on the layout and proceeded onto determining the main milestones of the project to tackle:
-                                                        -> here we used Kanban board in GitHub projects with some automation on some of the boards
-                                                        -> must-haves of our website and other features were organised using MoSCow method
-                                                     3) we have split the work into pairs matching partners by their abilities to ensure everyone learns from experience
-                                                     4) we have considered political, social and technological factors before proceeding with the design
-                                                        -> for example, user persona and technologies to aid creationg had to be determined  
+The team has followed linear design approach that is 
+ 1) we have gathered initially to discuss and brainstorm ideas:
+    - brainstorming took place on Moqups online platform for collaborative website wireframing.
+ 2) we have agreed on the layout and proceeded onto determining the main milestones of the project to tackle:
+    - here we used Kanban board in GitHub projects with some automation on some of the boards
+    - must-haves of our website and other features were organised using MoSCow method
+ 3) we have split the work into pairs matching partners by their abilities to ensure everyone learns from experience
+ 4) we have considered political, social and technological factors before proceeding with the design
+    - for example, user persona and technologies to aid creationg had to be determined  
 
 ![image](https://i.imgur.com/oUPyjN2.jpg)
 
