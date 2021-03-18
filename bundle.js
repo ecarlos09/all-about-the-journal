@@ -157,35 +157,27 @@ addGiphyButton.addEventListener('click', giphy.addGiphy)
 // Post button
 postBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    const date = new Date();;
-    const message = entryForm['journal-entry'].value;
+    const message = entryForm['journal-entry'].value.trim();
     const gif = selectedGif.firstChild;
-    const gifURL = gif ? gif.src : null;
-    const data = {message: message, gif: gifURL, date: date};
 
-    createEntry(data).then(entry => displayEntry(entry));
-    // msnry.layout()
-    entryForm.reset()
-    giphy.clearGiphy();
+    if(message) {
+        const date = new Date();
+        const gifURL = gif ? gif.src : null;
+        const data = {message: message, gif: gifURL, date: date};
+    
+        createEntry(data).then(entry => displayEntry(entry));
+        // msnry.layout()
+        entryForm.reset()
+        giphy.clearGiphy();
+    }
+    else if (gif){
+        window.alert("The GIF is great, but please add a journal entry!")
+    }
+    else {
+        window.alert("Please enter a journal entry!")
+    }
+   
 })
-
-// Layout
-
-// let msnry = new Masonry( timeline, {
-//     // options
-//     columnWidth: '.entry-box',
-//     itemSelector: '.entry-box',
-//     percentPosition: true,
-//     // gutter: 0,
-//     horizontalOrder: true,
-//     fitWidth: true,
-//     // percentPosition: true,
-//     initLayout: true,
-// });
-
-
-
-
 
 // Load entries
 getAllEntries.then(entries => {
@@ -193,21 +185,12 @@ getAllEntries.then(entries => {
     
 });
 
+
+// Layout
 const pckry = new Packery( timeline, {
     // options
     itemSelector: '.entry-box',
-    // columnWidth: '.entry-box',
   });
-  
-
-
-
-// imgLoad.on('done', () =>  {
-//     pckry.layout()
-//     console.log('images loaded');
-// })  
-
-
 
 // Sort entries
 sortBtn.addEventListener('change', (e) => {
@@ -248,14 +231,21 @@ timeline.addEventListener('click', (e) => {
     }
     // Send reacts
     if(target.className.includes("reactBtn")){
-        target.disabled == true;
+        // target.disabled == true;
         const btnID = target.className[target.className.length - 1]
         const id = target.closest(".entry-box").id;      
         const update = {reactBtn : btnID}
         
         addReact(id, update).then(reacts => {
-            target.children[0].textContent = reacts[btnID - 1];
+            const reactNum = target.children[0]
+            reactNum.textContent = reacts[btnID - 1];
+            reactNum.classList.toggle("show");
+            setTimeout(() => {
+                reactNum.classList.toggle("show");
+            }, 1500);
         });
+
+        
 
     }
 })
@@ -277,10 +267,11 @@ timeline.addEventListener('keyup', (e) => {
                 if (commentsBox.textContent === "No comments!") {
                     commentsBox.textContent = "";
                 }
-                else {
-                    commentsBox.prepend(loadComment(comments[comments.length -1]));
-                }
                 
+                const commentElement = loadComment(comments[comments.length -1])
+                commentsBox.prepend(commentElement);
+                pckry.prepended(commentElement);
+                imagesLoaded(timeline, () => pckry.layout()); 
             });
         }
 
@@ -290,12 +281,12 @@ timeline.addEventListener('keyup', (e) => {
     }
 })
 
-    //Search listeners
+//Search listeners
 // searchBar.addEventListener('mouseover', ()=>{});
 // search.addEventListener('submit', ()=>{});
 searchBtn.addEventListener('click', beginSearch);
 
-    //Begin search
+//Begin search
 function beginSearch(e) {
     e.preventDefault();
     console.log("Search is underway!");
@@ -370,7 +361,9 @@ function displayEntry(entry) {
     if (comments.length > 0) {
         entryComments.textContent="";
         comments.forEach(comment => {
-            entryComments.prepend(loadComment(comment));
+            const commentElement = loadComment(comment);
+            entryComments.prepend(commentElement);
+            pckry.prepended(commentElement);
         })
     }
     else {
@@ -385,7 +378,7 @@ function displayEntry(entry) {
         const reactNum = document.createElement("div");
         
         reactBtn.className = `react-btn reactBtn${i + 1}`;
-        reactNum.className = "react-num hide";
+        reactNum.className = "react-num";
         reactNum.textContent = reacts[i];
         
         reactBtn.appendChild(reactNum);
@@ -413,19 +406,8 @@ function displayEntry(entry) {
 
     timeline.prepend(entryDiv);
     
-    // imgLoad.on('done', () => {
-        
-    //     // msnry.layout();
-    // })
-    
     pckry.prepended(entryDiv);
     imagesLoaded(timeline, () => pckry.layout());
-    // pckry.layout();
-    
-
-    
-
-    
 
 }
 
@@ -433,9 +415,10 @@ function displayEntry(entry) {
 
 function toggleComments(entryComments) {
     let isVisible = entryComments.style.display === "block";
-    console.log(isVisible);
-    isVisible ? entryComments.style.display = "none" :
-        entryComments.style.display = "block"
+    isVisible ? entryComments.style.display = "none" 
+              : entryComments.style.display = "block"
+
+    imagesLoaded(timeline, () => pckry.layout());    
     return isVisible;
 }
 

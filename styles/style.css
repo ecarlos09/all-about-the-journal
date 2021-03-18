@@ -2,6 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
 :root {
     --button-size: 25px;
     --button-colour: rgb(48, 48, 48);
@@ -23,6 +24,7 @@
 /* HEADER */
 
 header {
+    width: 100vw;
     margin: auto;
     text-align: center;
     display: flex;
@@ -32,6 +34,8 @@ header {
 }
 
 h1 {
+    /* width: 10%; */
+    height:auto;
     display: inline;
     margin-top: 40px;
     font-size: 5em;
@@ -43,6 +47,7 @@ h1 {
 }
 
 h3 {
+    max-width: 80vw;
     display: inline;
     font-family: 'Space Mono', monospace;
     white-space: nowrap;
@@ -92,7 +97,7 @@ textarea {
 }
 
 input[type="button"], input[type="submit"] {
-    margin: 0px 5px;
+    margin: 10px 5px;
     padding: 1em 2em;
     /* font-size: 1em; */
     border: none;
@@ -107,12 +112,14 @@ input[type="button"]:hover, input[type="submit"]:hover {
     background: #7c7c7c;
 }
 
-input[type="text"], input[type="search"], select {
+
+input[type="search"], select {
     border: 2px solid rgb(32, 32, 32);
     background: rgb(255, 255, 255);
     border-radius: 1000px;
     padding: 1em;
     outline: none;
+    margin-top: 10px;
 }
 
 /* GIF FORM */
@@ -139,6 +146,8 @@ input[type="text"], input[type="search"], select {
     left: 75px;
 }
 
+/* TIMELINE VIEW OPTIONS */
+
 #timeline-viewing {
     display: flex;
     flex-flow: row wrap;
@@ -163,16 +172,9 @@ input[type="text"], input[type="search"], select {
 /* TIMELINE */
 
 #journal-timeline {
-    /* display: inline-flex;
-    flex-flow: row wrap;
-    align-items: flex-start;
-    justify-content: center;
-    width: 80%; */
     margin: auto;
     width: 80%;
-    overflow: auto;
-    /* text-align: center;
-    padding: 10px; */
+    overflow: hidden;
 }
 
 #journal-timeline::after {
@@ -182,13 +184,6 @@ input[type="text"], input[type="search"], select {
 }
 
 /* POSTS */
-
-/* #secondHalf {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-} */
-
 .entry-box {
     /* padding: 1em; */
     /* height: auto; */
@@ -202,7 +197,6 @@ input[type="text"], input[type="search"], select {
 }
 
 .entry-date {
-    /* position: absolute; */
     text-align: right;
     color: rgb(165, 165, 165);
     padding: 1em;
@@ -221,97 +215,91 @@ input[type="text"], input[type="search"], select {
     /* border-radius: 10px; */
 }
 
-.gif-box>img {
+.gif-box > img {
     display: block;
     width: 100%;
     height: auto;
     /* overflow: hidden; */
 }
 
-.comment-btn {
-    background: rgb(32, 32, 32);
-}
 
-.comments-box {
-    background-color: rgb(68, 68, 68);
-    color: white;
-    padding: 1em;
-    width: 80%;
-    margin-top: 1em;
-}
 
 .interaction-box {
-    display: flex;
+    display: inline-flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     background-color: rgb(226, 226, 226);
     padding: 1em;
     border-radius: 0px 0px 10px 10px;
-    /* margin: 1em; */
+    z-index: 0;
     word-wrap: break-word;
-}
-
-.comment-input {
-    flex-grow: 2;
-}
-
-.comments-box {
-    background-color: rgb(68, 68, 68);
-    color: white;
-    padding: 1em;
-    width: 100%;
-    margin-top: 1em;
-}
-
-.react-btns {
-    width: auto;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    padding: 1em;
 }
 
 button {
     width: var(--button-size);
     height: var(--button-size);
-    background: rgb(61, 61, 61);
-    border-radius: 1000px;
+    /* background: rgb(61, 61, 61); */
     color: inherit;
     border: none;
     font: inherit;
     cursor: pointer;
     outline: none;
     text-align: center;
-    padding: 1em;
+    /* padding: 1em; */
     margin: 5px;
 }
 
-.hide {
-    display: none;
+.comment-btn {
+    background: rgba(53, 53, 53, 0);
+    background-image: url("../assets/terminal_arrow.svg");
+    background-size: cover;
 }
+/* 
+.react-btns {
+
+} */
 
 .react-btn {
-    /* border: 10px solid transparent; */
-    z-index: 2;
-}
-
-.react-num {
-    height: inherit;
-    width: inherit;
     position: relative;
-    text-align: center;
-    line-height: var(--button-size);
-    background-color: rgb(22, 22, 22);
-    padding: inherit;
-    border-radius: inherit;
-    color: white;
+    border-radius: 1000px;
+    justify-content: flex-end;
+    overflow: visible;
+    /* border: 10px solid transparent; */
     z-index: 0;
 }
 
-.react-btn:hover>.hide {
-    display: block;
+.react-num {
+    transition: bottom 0.5s;
+    visibility: hidden;
+    bottom: 0px;
+    /* display: inline-block; */
+    position: relative;
+    width: 100%;
+    /* align-self: center; */
+    border-radius: inherit;
+    text-align: center;
+    line-height: var(--button-size);
+    /* margin: inherit; */
+    background-color: rgb(22, 22, 22, 1);
+    color: white;
+    z-index: 5;
 }
+
+.show {
+    bottom:20px;
+    display: block;
+    position: relative;
+    visibility: visible;
+    animation: fade 1.5s backwards; 
+    background-color: rgb(22, 22, 22, 1);
+}
+
+@keyframes fade {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+  }
+
 
 .reactBtn1 {
     background-image: url('../assets/smile.png');
@@ -328,6 +316,52 @@ button {
     background-size: cover;
 }
 
+
+.comment-input {
+    flex-grow: 1;
+    border: none;
+    border-radius: 1000px;
+    padding: 1em;
+    margin: 5px;
+    outline: none;
+    min-width: 30%;
+    max-width: calc(100% - 25px);
+    height: var(--button-size);
+}
+
+.comments-box {
+    background-color: rgb(68, 68, 68);
+    border-radius: 0 0 10px 10px;
+    color: white;
+    padding: 1em;
+    width: 100%;
+    margin-top: 1em;
+}
+
+.comment {
+    margin: 10px 0;
+    padding: 0.5em;
+    border-top:1px solid grey ;
+}
+
+.hide {
+    display: none;
+}
+
+footer{
+    margin: 10em auto 1em;
+    width: 60%;
+    text-align: center;
+    font-size: 1rem;
+    
+}
+
+footer a {
+    text-decoration: none;
+    color: rgb(122, 122, 122);
+}
+
+
 /* ANIMATIONS */
 
 h1 {
@@ -343,7 +377,7 @@ h3 {
         width: 0;
     }
     to {
-        width: 600px;
+        width: 100%;
     }
 }
 
@@ -356,12 +390,20 @@ h3 {
     }
 }
 
-@media (max-width: 576px) {  }
+@media (max-width: 768px) {  }
     :root {
         --column-num: 1
     }
 
-@media (min-width: 576px) and (max-width: 1200px) {  
+    h1{
+        font-size: 10vw
+    }
+
+    h3 {
+        display:none;
+    }
+
+@media (min-width: 768px) and (max-width: 1200px) {  
     :root {
         --column-num: 2
     }
