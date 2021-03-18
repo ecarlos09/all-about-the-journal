@@ -1,5 +1,5 @@
 
-const hostURL = "http://localhost:3000/" 
+const hostURL = "https://all-about-the-journal.herokuapp.com/" 
 
 async function get(route) {
     let response = await fetch(hostURL + route)
