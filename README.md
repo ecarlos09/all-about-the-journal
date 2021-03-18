@@ -48,7 +48,7 @@ The team has followed linear design approach that is
 
 ![image](https://i.imgur.com/oUPyjN2.jpg)
 
-Project keystages have been:
+Project keystages included:
  1. Initial setup of file structure on GitHub and cloning down of repos to start working on features on our individual machines.
  2. Creating HTML skeleton of the page and adding the main input form. 
  3. Server side routing.
@@ -60,10 +60,30 @@ Project keystages have been:
  9. Adding emojis and related buttons.
  10. Preliminary basic layout done in flex, then finished with the aid of Packery.
 
+## Wins and Challenges
 
+### Wins 👍
+ 1. Successfully integrated Giphy API to the webpage.
+ 2. Made layout assymmetric as an extra challenge.
+ 3. All essential elements were made to work as initially have planned. 
 
+### Challenges 👎
+ 1. Merging various features to staging branch on GitHub and making website work on various machines.
+ 2. Giphy API implementation -> making gif form drop used gif images.
+ 3. Layout styling: figuring out how to apply to non-existent elements and making it behave consistently.
+ 4. Making nested buttons.
+ 5. Final deploy of the website - unexpected challenges with integration of features. 
 
-##License
+## Future Features
+ 1. Location functionality with ability to pin down locations on a map.
+ 2. Social media sharing capabilities.
+ 3. Ability to include images or sketches.
+ 4. More emojis and custom styles (fonts, colors, post and page themes).
+ 5. User databases.
+
+## License
+
+[MIT License](LICENSE)
 
 
         
