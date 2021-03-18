@@ -14,7 +14,7 @@ But what is ... ?
 Read on, our valuable visitor, and you will find the truth in this document that hopefully will help you to use our journal effectively! Withous further ado, let's see us getting started.
 
 ## Mission
-Give computer power users place to unwind and clear the clutter of their minds by providing simple stylised online journal solution. By providing fun, easily accessible and safe environment for keeping your thoughts online we hope we can help you in short time get familiar with the practice and philosophy of journaling. 
+Give computer power users place to unwind and clear the clutter of their minds by providing simple stylised online journaling solution. By providing fun, easily accessible and safe environment for keeping your thoughts online we hope we can help you in short time to get familiar with practice and philosophy of journaling. 
 
 ## Installation and using the website
  
