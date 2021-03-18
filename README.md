@@ -85,7 +85,7 @@ Journal posts section finished
  2. Giphy API implementation -> making gif form drop used gif images.
  3. Layout styling: figuring out how to apply to non-existent elements and making it behave consistently.
  4. Making nested buttons.
- 5. Final deploy of the website - unexpected challenges with integration of features. 
+ 5. Final deploy of the website via Heroku - unexpected challenges with integration of features. 
 
 ## Future Features
  1. Location functionality with ability to pin down locations on a map.
