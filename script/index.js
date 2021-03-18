@@ -280,7 +280,7 @@ function createMessage(content, locationID) {
     const showMessage = messageLocation.innerText = content;
 }
 
-
+module.exports = { clearTimeline}
 
 
 

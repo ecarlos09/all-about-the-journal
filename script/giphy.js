@@ -1,6 +1,7 @@
 
 //GIPHY
 
+
 // GIPHY Elements
 const selectedGif = document.getElementById('selected-gif')
 const previewGifSection = document.getElementById('previewGifSection')
@@ -37,6 +38,8 @@ function searchGiphy(event) {
         .catch(err => console.log(err))
 }
 
+
+
 function addGiphy(event) {
     event.preventDefault()
     let query = document.getElementById("giphy-search").value.trim()
@@ -58,4 +61,4 @@ function clearGiphy() {
 }
 
 
-module.exports = { showGiphyForm, searchGiphy, addGiphy, clearGiphy }
+module.exports = { showGiphyForm, searchGiphy, addGiphy, clearGiphy}

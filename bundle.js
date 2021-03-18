@@ -55,6 +55,7 @@ module.exports = {get, add, create};
 
 //GIPHY
 
+
 // GIPHY Elements
 const selectedGif = document.getElementById('selected-gif')
 const previewGifSection = document.getElementById('previewGifSection')
@@ -82,6 +83,10 @@ function searchGiphy(event) {
     let gifSearchBar = document.getElementById("giphy-search")
     let query = gifSearchBar.value.trim()
     let url = `https://api.giphy.com/v1/gifs/search?api_key=${APIkey}&q=${query}&limit=1&offset=0&rating=g&lang=en`
+    fetchforSearch(url)
+}
+
+  function fetchforSearch(url) {
     fetch(url)
         .then(response => response.json())
         .then(content => {
@@ -112,7 +117,7 @@ function clearGiphy() {
 }
 
 
-module.exports = { showGiphyForm, searchGiphy, addGiphy, clearGiphy }
+module.exports = { showGiphyForm, searchGiphy, addGiphy, clearGiphy, fetchforSearch}
 },{}],3:[function(require,module,exports){
 
 const hostURL = "http://localhost:3000/";

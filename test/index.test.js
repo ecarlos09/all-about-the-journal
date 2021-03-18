@@ -1,26 +1,42 @@
 //Import js file
-const index = require('../script/index')
+const file = require('../script/index')
 
+const map = {};
+Window.addEventListener = jest.genMockFn().mockImpl((event, cb) => {
+  map[event] = cb;
+});
+
+let index;
 //Set up mock library
-jest.mock(index);
+
+//Save built-in jest libraries for DOM testing to variables
+const fs = require('fs');
+const path = require('path');
+//Call built-in methods to create abstraction of index.html
+const html = fs.readFileSync(path.resolve(__dirname, '../index.html'), 'utf8');
+
 
 
 //Set up overall test suite for index.js functions
-describe ('index.js', () => {
 
     //Template for sub test suites
     describe('beginSearch', () => {
-        // beforeEach(() => {
-        //     document.documentElement.innerHTML = '<element id="search-btn">...</element>';
-        //     global.id = document.querySelector('');
-        // })
-
-        test('test that beginSearch contains a callback function', () => {
-            const fakeClear = jest.fn();
-            index.beginSearch(e);
-            expect(fakeClear).toHaveBeenCalledTimes(1);
-            // expect(id.querySelectorAll('child-element')).toBe('desired result!');
+        beforeAll(() => {
+            document.addEventListener('DOMContentLoaded', function(){
+                console.log('Content loaded (we hope!)');
+                });          
         })
+    
+        beforeEach(() => {
+            document.documentElement.innerHTML = html.toString();
+            jest.mock(index);
+    
+        })
+
+     
+    test('to see if clearTimeline is defined', () => {
+        expect(file.clearTimeline).toBeDefined()
     })
 
 })
+
