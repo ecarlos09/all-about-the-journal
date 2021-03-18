@@ -60,7 +60,15 @@ Project keystages included:
  9. Adding emojis and related buttons.
  10. Preliminary basic layout done in flex, then finished with the aid of Packery.
 
-![image](https://i.imgur.com/hzD2jTl.jpg) ![image](https://i.imgur.com/QQGY1dR.jpg)
+![image](https://i.imgur.com/bRYwUQl.jpg) 
+
+
+
+Basic initial layout
+
+![image](https://i.imgur.com/QQGY1dR.jpg)
+
+Journal posts section finished
 
 ## Wins and Challenges
 
