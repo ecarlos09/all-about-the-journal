@@ -36,16 +36,29 @@ Read on, our valuable visitor, and you will find truth in this document that hop
 ## Process
 
 The team has followed linear design approach that is 
- 1) we have gathered initially to discuss and brainstorm ideas:
+ 1) We have gathered initially to discuss and brainstorm ideas:
     - brainstorming took place on Moqups online platform for collaborative website wireframing.
- 2) we have agreed on the layout and proceeded onto determining the main milestones of the project to tackle:
+ 2) We have agreed on the layout and proceeded onto determining the main milestones of the project to tackle:
     - here we used Kanban board in GitHub projects with some automation on some of the boards
     - must-haves of our website and other features were organised using MoSCow method
- 3) we have split the work into pairs matching partners by their abilities to ensure everyone learns from experience
- 4) we have considered political, social and technological factors before proceeding with the design
+ 3) We have split the work into pairs matching partners by their abilities to ensure everyone learns from experience
+    - we all got to work on both client and server sides
+ 5) We have considered political, social and technological factors related to our project before proceeding with the design
     - for example, user persona and technologies to aid creationg had to be determined  
 
 ![image](https://i.imgur.com/oUPyjN2.jpg)
+
+Project keystages have been:
+ 1. Initial setup of file structure on GitHub and cloning down of repos to start working on features on our individual machines.
+ 2. Creating HTML skeleton of the page and adding the main input form. 
+ 3. Server side routing.
+ 4. Creating fetch functions on the client side.
+ 5. Creating testing suite and adding functionality of recording data in a json file.
+ 6. Adding post functionality.
+ 7. Bringing in external Giphy API for gif integration.
+ 8. Adding comment feature and integrating it with the layout.
+ 9. Adding emojis and related buttons.
+ 10. Preliminary basic layout done in flex, then finished with the aid of Packery.
 
 
 
