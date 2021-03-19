@@ -87,6 +87,10 @@ Journal posts section finished
  4. Making nested buttons.
  5. Final deploy of the website via Heroku - unexpected challenges with integration of features. 
 
+### Bugs
+ 1. The search bar works fine except when searching for non-existent posts. In that case prrevious message on number of results is displayed. 
+
+
 ## Future Features
  1. Location functionality with ability to pin down locations on a map.
  2. Social media sharing capabilities.
