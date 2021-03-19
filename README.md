@@ -19,7 +19,7 @@ Give computer power users place to unwind and clear the clutter of their minds b
 ## Installation and using the website
  
  ### Using Netlify deployed link
- <link></link>
+ https://consoul-log.netlify.app/
  
  ### Without using the deployed website
  1. Clone or download the repos to the same folder from theduckfliesagain/all-about-the-journal and the duckfliesagain/journal-server.
